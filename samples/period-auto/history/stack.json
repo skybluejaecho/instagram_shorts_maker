@@ -1,0 +1,139 @@
+{
+  "title": "스택은 왜 나중에 넣은 값이 먼저 나올까?",
+  "audience": "자료구조를 처음 배우는 사람",
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "durationSeconds": 30,
+  "profile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "version": 1,
+  "narration": [
+    {
+      "id": "hook",
+      "text": "접시처럼 쌓인 데이터, 어떤 것부터 꺼낼까요?"
+    },
+    {
+      "id": "idea",
+      "text": "스택은 한쪽 끝에서만 값을 넣고 꺼내는 자료 구조입니다."
+    },
+    {
+      "id": "show",
+      "text": "에이를 넣고, 그 위에 비를 넣었다고 해보죠."
+    },
+    {
+      "id": "compare",
+      "text": "비가 먼저 나옵니다. 나중에 들어갔기 때문이죠."
+    },
+    {
+      "id": "remaining",
+      "text": "에이가 그다음 나오죠. 이 순서가 후입선출입니다."
+    },
+    {
+      "id": "finish",
+      "text": "되돌리기 기능도 최근 작업부터 취소할 때 스택을 활용할 수 있습니다."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "question",
+      "type": "question",
+      "from": "hook",
+      "headline": "쌓인 데이터,\n무엇부터 꺼낼까?"
+    },
+    {
+      "id": "definition",
+      "type": "explanation",
+      "from": "idea",
+      "headline": "한쪽 끝에서\n넣고 꺼내요",
+      "body": "새 값은 맨 위로\n꺼낼 때도 맨 위부터"
+    },
+    {
+      "id": "insert",
+      "type": "cards",
+      "from": "show",
+      "headline": "A를 넣고\n그 위에 B",
+      "body": "아래에서 위로 쌓입니다.",
+      "layout": "stack",
+      "cards": [
+        {
+          "id": "a",
+          "label": "A"
+        },
+        {
+          "id": "b",
+          "label": "B"
+        }
+      ]
+    },
+    {
+      "id": "remove",
+      "type": "cards",
+      "from": "compare",
+      "headline": "나중에 온 B가\n먼저 나옵니다",
+      "body": "꺼내는 순서  B → A",
+      "cards": [
+        {
+          "id": "b",
+          "label": "B"
+        },
+        {
+          "id": "a",
+          "label": "A"
+        }
+      ],
+      "carry": [
+        "a",
+        "b"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "b",
+          "at": "compare"
+        }
+      ]
+    },
+    {
+      "id": "last",
+      "type": "cards",
+      "from": "remaining",
+      "headline": "그다음은 A",
+      "body": "마지막에 넣은 값을 먼저 꺼내요.",
+      "cards": [
+        {
+          "id": "a",
+          "label": "A"
+        }
+      ],
+      "carry": [
+        "a"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "a",
+          "at": "remaining"
+        }
+      ]
+    },
+    {
+      "id": "summary",
+      "type": "conclusion",
+      "from": "finish",
+      "headline": "스택 = 후입선출",
+      "body": "LIFO\n예시 · 최근 작업부터 실행 취소"
+    }
+  ]
+}

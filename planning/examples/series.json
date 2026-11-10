@@ -1,0 +1,9 @@
+{
+  "id": "cs-demo",
+  "name": "CS 기획 연결 검증용 예제",
+  "audience": "배열을 배웠지만 이진 탐색은 처음 접하는 입문자",
+  "topics": ["이진 탐색의 원리와 조건"],
+  "defaultDurationSeconds": 30,
+  "tone": "짧은 질문과 구체적인 숫자 예시로 설명한다.",
+  "adapter": "samples/binary-search-30/adapter.cjs"
+}

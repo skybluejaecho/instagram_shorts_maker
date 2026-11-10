@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>이진 탐색은 왜 정렬이 필요할까?</title>
+  <style>
+    {{motionStyles}}
+    @font-face {
+      font-family: Malgun;
+      font-weight: 700;
+      src: local("Malgun Gothic Bold"), local("맑은 고딕 Bold");
+    }
+    * { box-sizing: border-box; }
+    body, main, h1, h2, p, ol { margin: 0; }
+    main {
+      --ink: #17273b;
+      --right: {{right}}s;
+      --left: {{left}}s;
+      position: relative;
+      width: 1080px; height: 1920px; overflow: hidden;
+      background: #203470; font: 700 44px/1.38 Malgun, sans-serif;
+      letter-spacing: -2px;
+    }
+    .shot {
+      position: absolute; inset: 0; visibility: hidden; color: var(--ink); overflow: hidden;
+      animation: cut-in 0s linear var(--in) forwards, cut-out 0s linear var(--out) forwards;
+    }
+    @keyframes cut-in { to { visibility: visible; } }
+    @keyframes cut-out { to { visibility: hidden; } }
+    .block { position: absolute; left: 90px; width: 824px; }
+    .settle { animation: settle .26s var(--enter-easing) var(--in) both; }
+    @keyframes settle { from { transform: translateY(15px); } to { transform: translateY(0); } }
+    h1, h2 { line-height: 1.20; letter-spacing: -5px; white-space: pre-line; }
+    .line { height: 7px; }
+    .nums { font-family: Arial, sans-serif; line-height: 1; letter-spacing: -4px; }
+    .row {
+      list-style: none; padding: 0; display: grid;
+      grid-template-columns: repeat(8, 1fr); gap: 8px;
+    }
+    .cell {
+      display: grid; place-items: center; min-width: 0; height: 126px;
+      border-radius: 9px; background: var(--tile); color: var(--tile-ink);
+      font: 700 54px/1 Arial, sans-serif; letter-spacing: -2px;
+    }
+    .on-cue { opacity: 0; animation: appear .15s var(--enter-easing) var(--at) forwards; }
+    @keyframes appear {
+      from { opacity: .84; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .until-cue { animation: disappear 0s linear var(--at) forwards; }
+    @keyframes disappear { to { opacity: 0; } }
+    .question { background: #203470; color: #fff9e8; }
+    .question .lead { top: 478px; font-size: 58px; color: #bbf2c7; }
+    .question h1 { top: 606px; font-size: 114px; letter-spacing: -8px; }
+    .question .line {
+      top: 968px; width: 222px; height: 12px; background: #bbf2c7; transform-origin: left;
+      animation: draw .42s var(--enter-easing) .16s both;
+    }
+    @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    .setup {
+      background: #f5f1e6; --tile: #e5e3d7; --tile-ink: #25333c;
+    }
+    .setup .lead { top: 266px; font-size: 53px; }
+    .setup .target { top: 354px; font-size: 284px; color: #2357c2; letter-spacing: -18px; }
+    .setup .label { top: 817px; font-size: 44px; }
+    .setup .row { top: 924px; }
+    .setup .note { top: 1175px; font-size: 46px; }
+    .first { background: #eceafb; --tile: #ffffff; --tile-ink: #393454; }
+    .first .lead { top: 267px; font-size: 53px; color: #534d78; }
+    .first .comparison { top: 410px; font-size: 155px; color: #342960; letter-spacing: -10px; }
+    .first .reason { top: 657px; font-size: 47px; }
+    .first .row { top: 983px; }
+    .first .pivot { background: #5241a5; color: #fff; }
+    .first .discard {
+      animation: mute-first .18s ease-out var(--right) forwards;
+    }
+    @keyframes mute-first { to { color: #66627a; background: #d9d6e3; } }
+    .first .range {
+      top: 1136px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; --at: var(--right);
+    }
+    .range span { border-top: 6px solid currentColor; padding-top: 13px; font-size: 38px; }
+    .range .removed { color: #716c81; }
+    .range .kept { color: #43318e; }
+    .second { background: #103e3a; color: #f3f6e8; --tile: #dbede1; --tile-ink: #143e39; }
+    .second .lead { top: 261px; font-size: 51px; color: #b7e3c5; }
+    .second .row { top: 413px; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .second .cell { height: 187px; font-size: 86px; border-radius: 13px; }
+    .second .pivot { color: #153a32; background: #d4f878; }
+    .second .discard { animation: mute-second .18s ease-out var(--left) forwards; }
+    @keyframes mute-second { to { color: #a4bdad; background: #36544e; } }
+    .second .comparison { top: 753px; font-size: 147px; letter-spacing: -9px; }
+    .second .reason { top: 1002px; font-size: 48px; --at: var(--left); }
+    .discovery { background: #d3f589; color: #143e35; }
+    .discovery .lead { top: 374px; font-size: 59px; }
+    .discovery .answer { top: 492px; font-size: 349px; letter-spacing: -23px; }
+    .discovery .line { top: 1024px; background: #365740; height: 5px; }
+    .discovery .trail { top: 1087px; font-size: 72px; }
+    .discovery .reason { top: 1239px; font-size: 46px; }
+    .counter { background: #fff1dd; color: #492721; --tile: #f5dfc5; --tile-ink: #492721; }
+    .counter h2 { top: 233px; font-size: 85px; }
+    .counter .caption { top: 650px; font-size: 44px; }
+    .counter .row { top: 763px; }
+    .counter .pivot { background: #534173; color: white; }
+    .counter .hidden-target { background: #a53c28; color: white; }
+    .counter .bracket {
+      top: 909px; width: 408px; padding-top: 17px; border-top: 7px solid #ab3e26;
+      color: #963723; font-size: 37px; line-height: 1.2;
+    }
+    .counter .reason { top: 1173px; font-size: 51px; line-height: 1.42; }
+  </style>
+</head>
+<body>
+  <main data-composition-id="binary-search-30" data-start="0" data-duration="30"
+        data-fps="30" data-width="1080" data-height="1920" data-no-timeline>
+    <section class="shot question" style="--in:{{questionIn}}s;--out:{{questionOut}}s">
+      <p class="block lead">이진 탐색은</p>
+      <h1 class="block settle">{{questionTitle}}</h1>
+      <i class="block line"></i>
+    </section>
+
+    <section class="shot setup" style="--in:{{setupIn}}s;--out:{{setupOut}}s">
+      <p class="block lead">찾을 값</p>
+      <p class="block target nums settle">{{setupTitle}}</p>
+      <h2 class="block label">작은 값부터 정렬한 여덟 칸</h2>
+      <ol class="block row">
+        <li class="cell">{{cell0}}</li><li class="cell">{{cell1}}</li><li class="cell">{{cell2}}</li><li class="cell">{{cell3}}</li>
+        <li class="cell">{{cell4}}</li><li class="cell">{{cell5}}</li><li class="cell">{{cell6}}</li><li class="cell">{{cell7}}</li>
+      </ol>
+      <p class="block note">가운데가 두 칸이면<br>이번에는 왼쪽 칸을 고릅니다.</p>
+    </section>
+
+    <section class="shot first" style="--in:{{firstCutIn}}s;--out:{{firstCutOut}}s">
+      <p class="block lead">첫 번째 비교</p>
+      <h2 class="block comparison nums settle">{{firstCutTitle}}</h2>
+      <p class="block reason">{{cell3}}과 그 왼쪽의 값은<br>모두 {{target}}보다 작습니다.</p>
+      <ol class="block row">
+        <li class="cell discard">{{cell0}}</li><li class="cell discard">{{cell1}}</li><li class="cell discard">{{cell2}}</li><li class="cell pivot discard">{{cell3}}</li>
+        <li class="cell">{{cell4}}</li><li class="cell">{{cell5}}</li><li class="cell">{{cell6}}</li><li class="cell">{{cell7}}</li>
+      </ol>
+      <p class="block range on-cue"><span class="removed">네 칸 제외</span><span class="kept">남은 후보</span></p>
+    </section>
+
+    <section class="shot second" style="--in:{{secondCutIn}}s;--out:{{secondCutOut}}s">
+      <p class="block lead">남은 네 칸에서 다시</p>
+      <ol class="block row">
+        <li class="cell">{{cell4}}</li><li class="cell pivot discard">{{cell5}}</li>
+        <li class="cell discard">{{cell6}}</li><li class="cell discard">{{cell7}}</li>
+      </ol>
+      <h2 class="block comparison nums settle">{{secondCutTitle}}</h2>
+      <p class="block reason until-cue">{{cell5}}과 그 오른쪽의 값은<br>모두 {{target}}보다 큽니다.</p>
+      <p class="block reason on-cue">왼쪽의 한 칸만 남습니다.</p>
+    </section>
+
+    <section class="shot discovery" style="--in:{{discoveryIn}}s;--out:{{discoveryOut}}s">
+      <p class="block lead">세 번 만에 찾은 값</p>
+      <h2 class="block answer nums settle">{{discoveryTitle}}</h2>
+      <i class="block line"></i>
+      <p class="block trail nums">{{cell3}} → {{cell5}} → {{target}}</p>
+    </section>
+
+    <section class="shot counter" style="--in:{{counterexampleIn}}s;--out:{{counterexampleOut}}s">
+      <h2 class="block settle">{{counterexampleTitle}}</h2>
+      <p class="block caption">가운데 값은 여전히 {{cell3}}</p>
+      <ol class="block row">
+        <li class="cell">{{counter0}}</li><li class="cell hidden-target">{{counter1}}</li>
+        <li class="cell">{{counter2}}</li><li class="cell pivot">{{counter3}}</li>
+        <li class="cell">{{counter4}}</li><li class="cell">{{counter5}}</li>
+        <li class="cell">{{counter6}}</li><li class="cell">{{counter7}}</li>
+      </ol>
+      <p class="block bracket">버리려던 쪽</p>
+      <p class="block reason">버리려던 왼쪽에<br>찾는 값 {{target}}가 있습니다.</p>
+    </section>
+    <audio id="narration" src="narration.wav" data-start="0" data-duration="{{voiceDuration}}"
+           data-track-index="1" data-volume="1"></audio>
+  </main>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{
+  "audience": "자료구조를 처음 배우는 사람",
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "version": 1,
+  "title": "스택의 맨 위 값을 꺼내지 않고 보는 법",
+  "durationSeconds": 30,
+  "profile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "narration": [
+    {
+      "id": "peek_q",
+      "text": "맨 위 값을 확인하려면 꼭 스택에서 꺼내야 할까요?"
+    },
+    {
+      "id": "peek_rule",
+      "text": "peek는 맨 위 값을 읽되 스택에서는 제거하지 않는 연산입니다."
+    },
+    {
+      "id": "peek_a",
+      "text": "에이가 아래에 있고 비가 위에 있는 스택을 예로 볼게요."
+    },
+    {
+      "id": "peek_b",
+      "text": "비가 맨 위에 있으므로 peek의 결과는 비입니다."
+    },
+    {
+      "id": "peek_same",
+      "text": "에이와 비는 확인한 뒤에도 같은 자리에 그대로 남습니다."
+    },
+    {
+      "id": "peek_pop",
+      "text": "비를 pop했다면 비는 반환된 뒤 스택에서 사라졌을 것입니다."
+    },
+    {
+      "id": "peek_end",
+      "text": "정리하면 peek는 맨 위 값을 보존하면서 확인하는 연산입니다."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "peek_scene_q",
+      "type": "question",
+      "from": "peek_q",
+      "headline": "확인하려면\n꺼내야 할까?",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "peek_scene_rule",
+      "type": "explanation",
+      "from": "peek_rule",
+      "headline": "peek는 확인",
+      "body": "맨 위 값을\n제거하지 않아요",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "peek_scene_stack",
+      "type": "cards",
+      "from": "peek_a",
+      "headline": "A 아래, B 위",
+      "body": "현재 스택의 모습",
+      "cards": [
+        {
+          "id": "peek_a_card",
+          "label": "A"
+        },
+        {
+          "id": "peek_b_card",
+          "label": "B"
+        }
+      ],
+      "layout": "stack",
+      "carry": [],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "peek_a_card",
+          "at": "peek_a"
+        }
+      ]
+    },
+    {
+      "id": "peek_scene_result",
+      "type": "cards",
+      "from": "peek_b",
+      "headline": "peek 결과는 B",
+      "body": "맨 위 값을 읽어요",
+      "cards": [
+        {
+          "id": "peek_a_card",
+          "label": "A"
+        },
+        {
+          "id": "peek_b_card",
+          "label": "B"
+        }
+      ],
+      "layout": "stack",
+      "carry": [
+        "peek_a_card",
+        "peek_b_card"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "peek_b_card",
+          "at": "peek_b"
+        }
+      ]
+    },
+    {
+      "id": "peek_scene_compare",
+      "type": "explanation",
+      "from": "peek_same",
+      "headline": "스택은 그대로",
+      "body": "pop은 제거\npeek는 보존",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "peek_scene_end",
+      "type": "conclusion",
+      "from": "peek_end",
+      "headline": "꺼내지 않고 확인",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    }
+  ]
+}

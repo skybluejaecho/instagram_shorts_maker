@@ -1,0 +1,176 @@
+{
+  "audience": "자료구조를 처음 배우는 사람",
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "version": 1,
+  "title": "큐의 front와 rear는 각각 어디일까?",
+  "durationSeconds": 30,
+  "profile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "narration": [
+    {
+      "id": "ends_q",
+      "text": "큐의 양쪽 끝은 서로 같은 역할을 할까요?"
+    },
+    {
+      "id": "ends_rule",
+      "text": "큐에는 값이 나가는 front와 새 값이 들어오는 rear가 있습니다."
+    },
+    {
+      "id": "ends_a",
+      "text": "에이가 먼저 들어왔다면 에이는 front 쪽에 놓입니다."
+    },
+    {
+      "id": "ends_gap",
+      "text": "그 뒤쪽인 rear는 다음 값이 들어올 자리입니다."
+    },
+    {
+      "id": "ends_hold",
+      "text": "에이는 먼저 들어온 값이라 앞자리를 그대로 지킵니다."
+    },
+    {
+      "id": "ends_b",
+      "text": "비가 추가되면 rear를 통해 에이의 뒤에 붙습니다."
+    },
+    {
+      "id": "ends_out",
+      "text": "에이가 front에 있으므로 제거하면 에이가 먼저 나갑니다."
+    },
+    {
+      "id": "ends_end",
+      "text": "정리하면 큐는 rear로 넣고 front에서 빼는 구조입니다."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "ends_scene_q",
+      "type": "question",
+      "from": "ends_q",
+      "headline": "큐의 양쪽 끝,\n역할도 같을까?",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "ends_scene_rule",
+      "type": "explanation",
+      "from": "ends_rule",
+      "headline": "두 끝의 역할",
+      "body": "front는 제거\nrear는 추가",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "ends_scene_a",
+      "type": "cards",
+      "from": "ends_a",
+      "headline": "A는 front 쪽",
+      "body": "먼저 들어온 값",
+      "cards": [
+        {
+          "id": "ends_a_card",
+          "label": "A"
+        }
+      ],
+      "layout": "row",
+      "carry": [],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "ends_a_card",
+          "at": "ends_a"
+        }
+      ]
+    },
+    {
+      "id": "ends_scene_gap",
+      "type": "cards",
+      "from": "ends_gap",
+      "headline": "rear는 뒤쪽",
+      "body": "새 값이 들어올 자리",
+      "cards": [
+        {
+          "id": "ends_a_card",
+          "label": "A"
+        }
+      ],
+      "layout": "row",
+      "carry": [
+        "ends_a_card"
+      ],
+      "actions": []
+    },
+    {
+      "id": "ends_scene_b",
+      "type": "cards",
+      "from": "ends_hold",
+      "headline": "B는 rear로 추가",
+      "body": "A 뒤에 붙어요",
+      "cards": [
+        {
+          "id": "ends_a_card",
+          "label": "A"
+        },
+        {
+          "id": "ends_b_card",
+          "label": "B"
+        }
+      ],
+      "layout": "row",
+      "carry": [
+        "ends_a_card"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "ends_b_card",
+          "at": "ends_b"
+        }
+      ]
+    },
+    {
+      "id": "ends_scene_end",
+      "type": "conclusion",
+      "from": "ends_out",
+      "headline": "rear로 넣고\nfront에서 빼기",
+      "body": "A가 먼저 나가요",
+      "cards": [
+        {
+          "id": "ends_a_card",
+          "label": "A"
+        },
+        {
+          "id": "ends_b_card",
+          "label": "B"
+        }
+      ],
+      "layout": "row",
+      "carry": [
+        "ends_a_card",
+        "ends_b_card"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "ends_a_card",
+          "at": "ends_out"
+        }
+      ]
+    }
+  ]
+}

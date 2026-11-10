@@ -1,0 +1,10 @@
+{
+  "name": "speech-sync-sample",
+  "private": true,
+  "scripts": {
+    "synthesize": "node synthesize.cjs"
+  },
+  "dependencies": {
+    "microsoft-cognitiveservices-speech-sdk": "1.53.0"
+  }
+}

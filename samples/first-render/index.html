@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>백이십</title>
+  <style>
+    @font-face {
+      font-family: "Malgun Gothic";
+      font-weight: 700;
+      src: local("Malgun Gothic Bold"), local("맑은 고딕 Bold");
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Malgun Gothic", sans-serif; }
+    #stage {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      padding: 0 120px;
+      overflow: hidden;
+      background: #f7f4eb;
+      color: #173832;
+    }
+    .reading {
+      position: absolute;
+      top: 520px;
+      margin: 0;
+      padding-top: 36px;
+      border-top: 8px solid #117d69;
+      font-size: 100px;
+      letter-spacing: -4px;
+    }
+    .value {
+      position: absolute;
+      top: 675px;
+      font: 700 286px/1.2 Arial, sans-serif;
+      letter-spacing: -14px;
+    }
+    .chart {
+      position: absolute;
+      top: 1135px;
+      width: 800px;
+      height: 82px;
+      background: #d9e0d8;
+    }
+    .bar {
+      height: 100%;
+      width: 100%;
+      background: #117d69;
+      transform-origin: left;
+      animation: grow 1s ease-in-out 0.25s both;
+    }
+    @keyframes grow {
+      from { transform: scaleX(0.8333333333); }
+      to { transform: scaleX(1); }
+    }
+    .tick {
+      position: absolute;
+      top: -14px;
+      bottom: -14px;
+      width: 3px;
+      background: #173832;
+    }
+    .tick span {
+      position: absolute;
+      top: 122px;
+      left: 50%;
+      transform: translateX(-50%);
+      font: 36px/1 Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <main id="stage" data-composition-id="first-render" data-width="1080"
+        data-height="1920" data-start="0" data-duration="2" data-fps="30" data-no-timeline>
+    <h1 class="reading">백이십</h1>
+    <div class="value">120</div>
+    <div class="chart" role="img" aria-label="100에서 120까지 늘어나는 막대">
+      <div class="bar"></div>
+      <div class="tick" style="left: 0"><span>0</span></div>
+      <div class="tick" style="left: 83.333333%"><span>100</span></div>
+      <div class="tick" style="left: 100%"><span>120</span></div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>이진 탐색에 정렬이 필요한 이유</title>
+  <style>
+    {{motionStyles}}
+    @font-face {
+      font-family: Malgun;
+      font-weight: 700;
+      src: local("Malgun Gothic Bold"), local("맑은 고딕 Bold");
+    }
+    * { box-sizing: border-box; }
+    body, h1, h2, p, ol { margin: 0; }
+    main {
+      --ink: #1b2542; --paper: #f6f6ef; --blue: #3166ca; --green: #14765e;
+      --sorted: {{sorted}}s; --first: {{first}}s; --right: {{right}}s;
+      --second: {{second}}s; --left: {{left}}s; --found: {{found}}s; --end: {{conclusion}}s;
+      position: relative; width: 1080px; height: 1920px; overflow: hidden;
+      background: var(--paper); color: var(--ink); font: 700 40px/1.4 Malgun, sans-serif;
+    }
+    header, .target, .array, .rail, .message, .history, .array-label {
+      position: absolute; left: 96px; width: 820px;
+    }
+    header { top: 142px; border-top: 6px solid var(--ink); padding-top: 22px; }
+    header p { color: var(--blue); font-size: 37px; letter-spacing: -2px; }
+    h1 { margin-top: 27px; font-size: 76px; line-height: 1.26; letter-spacing: -5px; }
+    .target {
+      top: 517px; display: flex; align-items: center; justify-content: space-between;
+      height: 122px; padding: 0 36px; color: white; background: var(--ink);
+    }
+    .target p { font-size: 38px; letter-spacing: -1.8px; }
+    .target b { font: 700 76px/1 Arial, sans-serif; }
+    .array-label { top: 710px; color: #4b5871; font-size: 36px; letter-spacing: -1.6px; }
+    .array {
+      top: 816px; display: flex; gap: 12px;
+      padding: 0; list-style: none;
+    }
+    .cell {
+      position: relative; width: 92px; height: 112px; flex: 0 0 92px;
+      display: grid; place-items: center; color: var(--ink); background: #e6e9f1;
+      border-radius: 9px; font: 700 54px/1 Arial, sans-serif; letter-spacing: -2px;
+    }
+    @keyframes select-cell { to { background: var(--blue); color: white; } }
+    @keyframes discard-cell { to { background: #d7dbe4; color: #52607b; } }
+    @keyframes solved-cell { to { background: var(--green); color: white; } }
+    .lower { animation: discard-cell .14s ease-in-out var(--right) forwards; }
+    .upper { animation: discard-cell .14s ease-in-out var(--left) forwards; }
+    .first {
+      animation: select-cell 0s linear var(--first) forwards,
+        discard-cell .14s ease-in-out var(--right) forwards;
+    }
+    .second {
+      animation: select-cell 0s linear var(--second) forwards,
+        discard-cell .14s ease-in-out var(--left) forwards;
+    }
+    .match { animation: solved-cell 0s linear var(--found) forwards; }
+    .pointer {
+      position: absolute; bottom: calc(100% + 10px); left: 50%;
+      width: 24px; height: 15px; margin-left: -12px; opacity: 0; background: var(--blue);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      animation: pointer-in .12s var(--enter-easing) var(--in) forwards,
+        vanish 0s linear var(--out) forwards;
+    }
+    @keyframes pointer-in { from { opacity: .85; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+    @keyframes vanish { to { opacity: 0; } }
+    .rail { top: 944px; height: 9px; background: #d7dbe4; border-radius: 3px; }
+    .range {
+      height: 100%; background: var(--blue);
+      animation: take-right .25s var(--gauge-easing) var(--right) forwards,
+        take-left .25s var(--gauge-easing) var(--left) forwards,
+        confirm-range .14s linear var(--found) forwards;
+    }
+    @keyframes take-right { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 0 416px); } }
+    @keyframes take-left { from { clip-path: inset(0 0 0 416px); } to { clip-path: inset(0 312px 0 416px); } }
+    @keyframes confirm-range { to { background: var(--green); } }
+    .range-label {
+      position: absolute; left: 0; top: 16px;
+      color: #4b5871; font-size: 27px; letter-spacing: -1.4px;
+    }
+    .message {
+      top: 1055px; height: 310px; overflow: hidden;
+      padding: 36px 40px; color: white; background: var(--ink);
+    }
+    .beat {
+      position: absolute; inset: 36px 40px; opacity: 0;
+      animation: beat-in .15s var(--enter-easing) var(--in) forwards,
+        vanish 0s linear var(--out) forwards;
+    }
+    @keyframes beat-in {
+      from { opacity: .8; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .beat h2 { font-size: 60px; line-height: 1.24; letter-spacing: -3.5px; }
+    .beat h2.math { font: 700 82px/1 Arial, sans-serif; letter-spacing: -4px; }
+    .beat p { margin-top: 32px; font-size: 36px; line-height: 1.48; letter-spacing: -1.6px; }
+    .beat.last { animation: beat-in .15s var(--enter-easing) var(--end) forwards; }
+    .beat.last h2 { color: #b7f5da; }
+    .history {
+      top: 1452px; display: flex; gap: 22px; align-items: center;
+      padding-top: 22px; border-top: 2px solid #ccd2d9;
+    }
+    .history b { margin-right: 13px; font-size: 32px; letter-spacing: -1.5px; }
+    .visited {
+      opacity: 0; color: var(--blue); font: 700 49px/1 Arial, sans-serif;
+      animation: result-arrive var(--result-settle) var(--enter-easing) var(--at) forwards;
+    }
+    .visited:last-child { color: var(--green); }
+  </style>
+</head>
+<body>
+  <main data-composition-id="binary-search-30" data-start="0" data-duration="30"
+        data-width="1080" data-height="1920" data-fps="30" data-no-timeline>
+    <header><p>이진 탐색</p><h1>왜 정렬해야<br>절반을 버릴 수 있을까?</h1></header>
+    <section class="target"><p>찾을 값</p><b>{{target}}</b></section>
+    <p class="array-label">작은 값부터 정렬한 배열</p>
+    <ol class="array" aria-label="오름차순 배열">
+      <li class="cell lower">{{cell0}}</li>
+      <li class="cell lower">{{cell1}}</li>
+      <li class="cell lower">{{cell2}}</li>
+      <li class="cell first">{{cell3}}<i class="pointer" style="--in:var(--first);--out:var(--right)"></i></li>
+      <li class="cell match">{{cell4}}</li>
+      <li class="cell second">{{cell5}}<i class="pointer" style="--in:var(--second);--out:var(--left)"></i></li>
+      <li class="cell upper">{{cell6}}</li>
+      <li class="cell upper">{{cell7}}</li>
+    </ol>
+    <div class="rail" aria-label="남은 탐색 범위"><div class="range"></div><p class="range-label">남은 탐색 범위</p></div>
+    <section class="message">
+      <div class="beat" style="--in:0s;--out:var(--sorted)">
+        <h2>여덟 칸에서 찾기</h2><p>모두 확인하지 않고도<br>어느 쪽에 답이 있는지 알 수 있을까?</p>
+      </div>
+      <div class="beat" style="--in:var(--sorted);--out:var(--first)">
+        <h2>가운데부터 비교</h2><p>가운데가 두 칸이면 왼쪽 칸을 고릅니다.</p>
+      </div>
+      <div class="beat" style="--in:var(--first);--out:var(--right)">
+        <h2 class="math">{{cell3}} &lt; {{target}}</h2><p>{{cell3}}과 그 왼쪽의 값은<br>모두 {{target}}보다 작습니다.</p>
+      </div>
+      <div class="beat" style="--in:var(--right);--out:var(--second)">
+        <h2>오른쪽 네 칸</h2><p>남은 네 칸에서 다시 가운데를 봅니다.</p>
+      </div>
+      <div class="beat" style="--in:var(--second);--out:var(--left)">
+        <h2 class="math">{{cell5}} &gt; {{target}}</h2><p>{{cell5}}과 그 오른쪽의 값은<br>모두 {{target}}보다 큽니다.</p>
+      </div>
+      <div class="beat" style="--in:var(--left);--out:var(--found)">
+        <h2>왼쪽 한 칸</h2><p>남은 네 칸 중 오른쪽 세 칸을 제외합니다.</p>
+      </div>
+      <div class="beat" style="--in:var(--found);--out:var(--end)">
+        <h2 class="math">{{cell4}} = {{target}}</h2><p>세 번의 비교로 찾았습니다.</p>
+      </div>
+      <div class="beat last">
+        <h2>정렬이 필요한 이유</h2><p>정렬이 안 됐다면, 버린 쪽에도<br>{{target}}가 있을 수 있습니다.</p>
+      </div>
+    </section>
+    <section class="history" aria-label="비교한 값">
+      <b>비교한 값</b>
+      <span class="visited" style="--at:var(--first)">{{cell3}}</span>
+      <span class="visited" style="--at:var(--second)">→ {{cell5}}</span>
+      <span class="visited" style="--at:var(--found)">→ {{cell4}}</span>
+    </section>
+    <audio id="narration" src="narration.wav" data-start="0" data-duration="{{voiceDuration}}"
+           data-track-index="1" data-volume="1"></audio>
+  </main>
+</body>
+</html>

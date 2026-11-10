@@ -1,0 +1,9 @@
+{
+  "id": "cs-auto-live-01",
+  "seriesId": "cs-auto-live",
+  "startDate": "2026-11-23",
+  "days": 3,
+  "timezone": "Asia/Seoul",
+  "times": ["19:00"],
+  "batchSize": 2
+}

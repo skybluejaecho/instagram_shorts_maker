@@ -1,0 +1,41 @@
+/* Override these defaults on a series' root composition to tune its motion. */
+:root {
+  --gauge-easing: cubic-bezier(.42, 0, .58, 1);
+  --enter-easing: cubic-bezier(.2, .7, .3, 1);
+  --row-lead: .20s;
+  --row-lift: 10px;
+  --result-settle: .16s;
+  --result-lift: 4px;
+  --text-fade: .14s;
+}
+
+/* --begin / --finish are speech times. Easing changes speed inside that interval. */
+.motion-gauge {
+  transform-origin: left;
+  animation: gauge-travel calc(var(--finish) - var(--begin)) var(--gauge-easing) var(--begin) both;
+}
+@keyframes gauge-travel {
+  from { transform: scaleX(var(--from)); }
+  to { transform: scaleX(var(--to)); }
+}
+
+/* The row is fully visible by the first frame of gauge travel. */
+.motion-row {
+  animation: row-arrive var(--row-lead) var(--enter-easing) calc(var(--begin) - var(--row-lead)) both;
+}
+@keyframes row-arrive {
+  from { opacity: 0; transform: translateY(var(--row-lift)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Results first become readable on their spoken cue, then settle into place. */
+.motion-result {
+  opacity: 0;
+  animation: result-arrive var(--result-settle) var(--enter-easing) var(--finish) forwards;
+}
+@keyframes result-arrive {
+  from { opacity: .82; transform: translateY(var(--result-lift)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }

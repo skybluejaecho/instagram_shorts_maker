@@ -1,0 +1,28 @@
+{
+  "title": "이진 탐색은 왜 정렬이 필요할까?",
+  "audience": "배열을 배웠지만 이진 탐색은 처음 접하는 CS 입문자",
+  "objective": "가운데 값과 목표를 비교했을 때, 오름차순 정렬이 어떤 후보들을 안전하게 제외할 수 있게 하는지 설명한다.",
+  "durationSeconds": 30,
+  "values": [3, 7, 12, 18, 24, 31, 42, 56],
+  "target": 24,
+  "counterexampleValues": [3, 24, 7, 18, 12, 31, 42, 56],
+  "reference": "https://xlinux.nist.gov/dads/HTML/binarySearch.html",
+  "shots": [
+    { "id": "question", "from": "start", "transitionSeconds": 0, "carry": "‘이진 탐색’ 표제가 다음 화면의 상단으로 이동하고 질문 아래의 밑줄은 배열을 받치는 선으로 이어진다.", "layout": "질문 타이포그래피", "headline": "왜 정렬이\n필요할까?", "visual": "질문만 크게 보여준다. 목표값, 배열, 비교 이력은 아직 숨긴다." },
+    { "id": "setup", "from": "sorted", "transitionSeconds": 0.58, "carry": "질문의 제목·강조선을 이어받고, 배열은 도입 이후에만 펼친다.", "layout": "목표와 배열 소개", "headline": "24", "visual": "여덟 값을 오름차순으로 펼치고 짝수 개일 때 왼쪽 가운데를 고르는 규칙을 제시한다." },
+    { "id": "firstCut", "from": "first", "transitionSeconds": 0.45, "carry": "소개 화면의 여덟 칸과 목표값을 유지한 채 18을 강조한다.", "layout": "첫 비교와 제외할 범위", "headline": "18 < 24", "visual": "비교식을 주인공으로 두고 여덟 칸을 보조 그림으로 쓴다. ‘오른쪽’에서 18을 포함한 왼쪽 네 칸을 제외한다." },
+    { "id": "secondCut", "from": "second", "transitionSeconds": 0.6, "carry": "오른쪽 네 칸이 기존 자리에서 출발해 넓어지고 나머지는 물러난다.", "layout": "남은 네 칸 확대", "headline": "31 > 24", "visual": "남은 24·31·42·56만 화면을 채운다. ‘왼쪽’에서 31 이상의 세 칸을 제외한다." },
+    { "id": "discovery", "from": "found", "transitionSeconds": 0.6, "carry": "남은 배열 셀 24가 현재 위치에서 정답 위치로 이동하고 커진다.", "layout": "결과 공개", "headline": "24", "visual": "정답 하나를 크게 표시하고 18 → 31 → 24, 세 번의 비교를 함께 보여준다." },
+    { "id": "counterexample", "from": "conclusion", "transitionSeconds": 0.62, "carry": "큰 24가 반례의 왼쪽 둘째 칸으로 돌아가고 다른 숫자들이 주변을 채운다.", "layout": "정렬되지 않은 반례", "headline": "순서가\n뒤섞였다면?", "visual": "가운데 18은 그대로 두고 24를 왼쪽으로 옮긴다. 정렬됐다고 가정해 왼쪽을 버리면 정답도 버린다는 것을 보여준다." }
+  ],
+  "beats": [
+    { "id": "hook", "narration": "이진 탐색, 왜 절반을 건너뛰어도 될까요?", "visual": "질문 하나만 제시한다." },
+    { "id": "sorted", "narration": "오름차순 배열에서 이십사를 찾아보죠. 가운데 둘 중 왼쪽은", "visual": "목표 24와 오름차순을 제시한다. 배열에서 답을 미리 강조하지 않는다." },
+    { "id": "first", "narration": "십팔. 왼쪽 값도 모두 이십사보다 작으니,", "visual": "첫 가운데 값 18을 가리킨다." },
+    { "id": "right", "narration": "오른쪽 네 칸만 봅니다. 새 가운데는", "visual": "18 이하인 네 칸을 흐리게 하고 24, 31, 42, 56을 후보로 남긴다." },
+    { "id": "second", "narration": "삼십일. 오른쪽 값도 모두 이십사보다 크니,", "visual": "남은 범위의 가운데 값 31을 가리킨다." },
+    { "id": "left", "narration": "왼쪽 한 칸만 남죠.", "visual": "31 이상인 세 칸을 흐리게 한다." },
+    { "id": "found", "narration": "이십사. 세 번 만에 찾았습니다.", "visual": "남은 24를 확인하고 18 → 31 → 24를 보여준다." },
+    { "id": "conclusion", "narration": "정렬이 안 됐다면, 버린 쪽에도 이십사가 있을 수 있죠.", "visual": "뒤섞인 배열에서 실제 24가 제외하려는 왼쪽에 있음을 보여준다." }
+  ]
+}

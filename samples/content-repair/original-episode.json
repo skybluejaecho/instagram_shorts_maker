@@ -1,0 +1,153 @@
+{
+  "audience": "자료구조를 처음 배우는 사람",
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "version": 1,
+  "title": "가득 찬 deque에 값을 더 넣으면 무엇이 사라질까?",
+  "durationSeconds": 30,
+  "profile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "narration": [
+    {
+      "id": "q_full",
+      "text": "최대 길이 2인 Python deque에 시를 더 넣으면 어떻게 될까요?"
+    },
+    {
+      "id": "rule_maxlen",
+      "text": "maxlen은 원소 수를 정해진 최대치로 제한합니다."
+    },
+    {
+      "id": "state_ab",
+      "text": "먼저 왼쪽부터 에이, 비가 있어 두 칸이 모두 찼습니다."
+    },
+    {
+      "id": "keep_b",
+      "text": "비는 남아 있고, 이제 오른쪽에 새 값을 추가합니다."
+    },
+    {
+      "id": "add_c",
+      "text": "시는 오른쪽에 들어가고 반대쪽 에이는 밀려나, 결과는 비, 시가 됩니다."
+    },
+    {
+      "id": "summary",
+      "text": "즉, 가득 찬 maxlen deque의 append는 반대쪽 값을 버리고 길이를 유지합니다."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "scene_question",
+      "type": "question",
+      "from": "q_full",
+      "headline": "가득 찬 deque에\nC를 더 넣으면?",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "scene_rule",
+      "type": "explanation",
+      "from": "rule_maxlen",
+      "headline": "maxlen은\n최대 원소 수",
+      "body": "정해진 길이를 넘지 않아요",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "scene_full",
+      "type": "cards",
+      "from": "state_ab",
+      "headline": "최대 길이 2\n두 칸이 찬 상태",
+      "body": "왼쪽부터 A, B",
+      "cards": [
+        {
+          "id": "card_a",
+          "label": "A"
+        },
+        {
+          "id": "card_b",
+          "label": "B"
+        }
+      ],
+      "layout": "row",
+      "carry": [],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "card_a",
+          "at": "state_ab"
+        }
+      ]
+    },
+    {
+      "id": "scene_append",
+      "type": "cards",
+      "from": "keep_b",
+      "headline": "오른쪽에 C 추가",
+      "body": "반대쪽 A가 밀려나요",
+      "cards": [
+        {
+          "id": "card_b",
+          "label": "B"
+        },
+        {
+          "id": "card_c",
+          "label": "C"
+        }
+      ],
+      "layout": "row",
+      "carry": [
+        "card_b"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "card_b",
+          "at": "keep_b"
+        },
+        {
+          "type": "highlight",
+          "target": "card_c",
+          "at": "add_c"
+        }
+      ]
+    },
+    {
+      "id": "scene_result",
+      "type": "conclusion",
+      "from": "summary",
+      "headline": "반대쪽은 버리고\n길이는 그대로",
+      "body": "append 결과: B, C",
+      "cards": [
+        {
+          "id": "card_b",
+          "label": "B"
+        },
+        {
+          "id": "card_c",
+          "label": "C"
+        }
+      ],
+      "layout": "row",
+      "carry": [
+        "card_b",
+        "card_c"
+      ],
+      "actions": []
+    }
+  ]
+}

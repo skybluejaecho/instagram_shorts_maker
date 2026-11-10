@@ -1,0 +1,7 @@
+{
+  "periodId": "cs-auto-live-01",
+  "seriesId": "cs-auto-live",
+  "evidenceDirectory": "runs/_periods/auto-validation-cs-auto-live-01",
+  "jobs": 2,
+  "maxAttempts": 3
+}

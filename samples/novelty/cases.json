@@ -1,0 +1,45 @@
+{
+  "description": "의미 중복 판정을 검증하기 위한 가상 기획 데이터이며 실제 게시 이력이 아닙니다.",
+  "series": { "id": "novelty-fixture", "name": "의미 중복 검증", "audience": "자료구조 입문자", "topics": ["스택"] },
+  "history": [
+    {
+      "id": "lifo", "title": "스택은 왜 나중에 넣은 값이 먼저 나올까?", "topicKey": "stack.lifo",
+      "objective": "스택의 후입선출을 A와 B의 입력·출력 순서로 설명한다.",
+      "angle": "쌓인 두 카드를 꺼내는 순서로 보여준다.",
+      "narration": "에이를 넣고 그 위에 비를 넣으면 나중에 들어온 비부터 나옵니다. 이 순서가 후입선출입니다."
+    },
+    {
+      "id": "empty", "title": "빈 스택에서 꺼내기 전에 확인하기", "topicKey": "stack.underflow",
+      "objective": "빈 스택에서 pop을 시도하는 언더플로 상황과 빈 상태 확인의 필요성을 설명한다.",
+      "angle": "하나의 카드를 꺼낸 뒤 다시 꺼내려고 하는 상황을 보여준다.",
+      "narration": "에이 하나를 꺼내면 스택은 비게 됩니다. 다시 팝하면 꺼낼 값이 없습니다. 팝 전에는 비어 있는지 확인하세요."
+    }
+  ],
+  "entries": [
+    {
+      "plan": {
+        "id": "exact-copy", "title": "스택은 왜 나중에 넣은 값이 먼저 나올까?", "topicKey": "stack.lifo",
+        "objective": "스택의 후입선출을 A와 B의 입력·출력 순서로 설명한다.",
+        "angle": "쌓인 두 카드를 꺼내는 순서로 보여준다."
+      },
+      "story": { "narration": [{ "id": "lesson", "text": "에이를 넣고 그 위에 비를 넣으면 나중에 들어온 비부터 나옵니다. 이 순서가 후입선출입니다." }] }
+    },
+    {
+      "plan": {
+        "id": "paraphrase", "title": "쌓아 놓은 책은 어느 것부터 꺼낼까?", "topicKey": "lesson.latest-entry-first",
+        "objective": "스택에 차례로 보관한 데이터를 입력의 역순으로 꺼내는 규칙을 이해한다.",
+        "angle": "책을 아래에서 위로 쌓고 위의 책부터 꺼내는 비유를 쓴다."
+      },
+      "story": { "narration": [{ "id": "lesson", "text": "책을 하나씩 위로 쌓아 보세요. 맨 나중에 올린 책을 먼저 꺼내죠. 스택도 마지막에 넣은 데이터가 먼저 나오는 구조입니다." }] }
+    },
+    {
+      "plan": {
+        "id": "new-knowledge", "title": "크기가 정해진 스택이 가득 차면?", "topicKey": "stack.bounded-capacity-overflow",
+        "objective": "고정 용량 스택이 가득 찬 상태에서 push를 시도하는 오버플로 상황과 여유 공간 확인의 필요성을 설명한다.",
+        "angle": "두 칸짜리 스택에 A와 B가 들어 있을 때 C를 추가할 공간이 없는 상황을 보여준다."
+      },
+      "story": { "narration": [{ "id": "lesson", "text": "두 칸짜리 고정 용량 스택에 에이와 비가 차 있으면 씨를 넣을 자리가 없습니다. 이런 푸시 시도는 오버플로를 일으킬 수 있으므로 남은 공간을 확인해야 합니다." }] }
+    }
+  ],
+  "expected": { "duplicatePlanIds": ["exact-copy", "paraphrase"], "reviewPlanIds": [] }
+}

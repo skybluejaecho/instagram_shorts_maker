@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>백에서 백이십으로</title>
+  <style>
+    @font-face {
+      font-family: "Malgun Gothic";
+      src: local("Malgun Gothic Bold"), local("맑은 고딕 Bold");
+      font-weight: 700;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Malgun Gothic", sans-serif; }
+    main {
+      position: relative; width: 1080px; height: 1920px; overflow: hidden;
+      background: #f7f4eb; color: #173832;
+    }
+    h1, .number, .chart, .caption { position: absolute; left: 120px; margin: 0; }
+    h1 {
+      top: 520px; padding-top: 36px; border-top: 8px solid #117d69;
+      font-size: 100px; letter-spacing: -4px;
+    }
+    .number { top: 675px; font: bold 286px/1.2 Arial, sans-serif; letter-spacing: -14px; }
+    .chart { top: 1135px; width: 800px; height: 82px; background: #d9e0d8; }
+    .bar {
+      height: 100%; background: #117d69; transform-origin: left;
+      animation: rise {{riseLength}}s linear {{riseStart}}s both;
+    }
+    @keyframes rise {
+      from { transform: scaleX(0.8333333333); }
+      to { transform: scaleX(1); }
+    }
+    .tick {
+      position: absolute; top: -14px; bottom: -14px;
+      border-left: 3px solid #173832;
+    }
+    .tick span {
+      position: absolute; top: 122px; left: 0; transform: translateX(-50%);
+      font: 36px/1 Arial, sans-serif;
+    }
+    .caption { top: 1430px; font-size: 42px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main data-composition-id="speech-sync" data-width="1080" data-height="1920"
+        data-start="0" data-duration="{{filmLength}}" data-fps="30" data-no-timeline>
+    <h1>백이십</h1>
+    <div class="number">120</div>
+    <div class="chart" role="img" aria-label="100에서 120까지 늘어나는 막대">
+      <div class="bar"></div>
+      <div class="tick" style="left: 0"><span>0</span></div>
+      <div class="tick" style="left: 83.333333%"><span>100</span></div>
+      <div class="tick" style="left: 100%"><span>120</span></div>
+    </div>
+    <p class="caption">백에서 이십 퍼센트 오르면, 백이십.</p>
+    <audio id="narration" src="narration.wav" data-start="0"
+           data-duration="{{audioLength}}" data-track-index="1" data-volume="1"></audio>
+  </main>
+</body>
+</html>

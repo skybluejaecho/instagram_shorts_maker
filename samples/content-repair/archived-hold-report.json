@@ -1,0 +1,405 @@
+{
+  "version": 1,
+  "status": "needs_review",
+  "createdAt": "2026-11-09T06:42:06.647Z",
+  "candidateCount": 1,
+  "inputHash": "8989a1d7c09f7f97fd0814386e15aab7b48acfa0cd2870df35edcb2822d17318",
+  "entryHash": "c92718c319b3afd33fc029e430a9862599cac17cc89ff32498f8195fb00baad5",
+  "sourceHash": "7f955ce30b82e0950aa0c195214c3b7b3a7d865b7b86cd83e900989c980a4351",
+  "correctionPlanIds": [],
+  "reviewPlanIds": [
+    "cs-auto-live-01-b01-01"
+  ],
+  "units": [
+    {
+      "unitId": "e0-u0",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "plan.title",
+      "text": "가득 찬 deque에 값을 더 넣으면 무엇이 사라질까?",
+      "verdict": "uncertain",
+      "claim": "가득 찬 deque에 값을 더 넣으면 어떤 값이 사라진다는 전제를 담은 질문이다.",
+      "reason": "자료는 가득 찬 Python maxlen deque에서 append 또는 appendleft를 사용할 때 반대쪽 값이 밀려난다고 설명하지만, insert는 IndexError를 발생시킨다고 명시한다. 제목은 추가 연산을 특정하지 않아 무엇이 사라지는지 확정할 수 없다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u1",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "plan.objective",
+      "text": "Python의 maxlen deque가 가득 찬 상태에서 append하면 반대쪽 끝의 값이 밀려나고 길이는 유지됨을 이해한다.",
+      "verdict": "supported",
+      "claim": "가득 찬 Python maxlen deque에 append하면 반대쪽 끝의 값이 밀려나고 길이는 유지된다.",
+      "reason": "근거 자료가 가득 찬 deque의 append 시 반대쪽 끝의 값이 밀려나며 길이가 유지된다고 직접 설명한다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "가득 찬 deque에 append 또는 appendleft로 추가하면 반대쪽 끝의 값이 밀려나 길이가 유지된다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u2",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.title",
+      "text": "가득 찬 deque에 값을 더 넣으면 무엇이 사라질까?",
+      "verdict": "uncertain",
+      "claim": "가득 찬 deque에 값을 더 넣으면 어떤 값이 사라진다는 전제를 담은 질문이다.",
+      "reason": "append라면 반대쪽 값이 사라지지만, 자료에는 insert가 IndexError를 일으키는 예외도 있다. 제목만으로는 추가 연산이 무엇인지 알 수 없어 보류한다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u3",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.narration[0].text",
+      "text": "최대 길이 2인 Python deque에 시를 더 넣으면 어떻게 될까요?",
+      "cueId": "q_full",
+      "verdict": "not_factual",
+      "claim": "최대 길이 2인 Python deque에 C를 더하는 가상 상황을 제시하는 도입 질문이다.",
+      "reason": "연산 결과를 단정하지 않고 가상의 입력과 질문만 제시한다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u4",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.narration[1].text",
+      "text": "maxlen은 원소 수를 정해진 최대치로 제한합니다.",
+      "cueId": "rule_maxlen",
+      "verdict": "supported",
+      "claim": "maxlen은 deque의 원소 수를 지정된 최대치로 제한한다.",
+      "reason": "근거 자료가 maxlen의 기능을 동일하게 설명한다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "maxlen은 최대 원소 수를 제한한다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u5",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.narration[2].text",
+      "text": "먼저 왼쪽부터 에이, 비가 있어 두 칸이 모두 찼습니다.",
+      "cueId": "state_ab",
+      "verdict": "not_factual",
+      "claim": "최대 길이 2인 가상 deque의 초기값을 왼쪽부터 A, B로 설정해 두 칸이 찬 상태를 제시한다.",
+      "reason": "검산할 연산 결과가 아니라 예시의 초기 입력 설정이다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u6",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.narration[3].text",
+      "text": "비는 남아 있고, 이제 오른쪽에 새 값을 추가합니다.",
+      "cueId": "keep_b",
+      "verdict": "supported",
+      "claim": "초기 deque [A, B]에 오른쪽으로 새 값을 추가하는 과정에서 B는 남는다.",
+      "reason": "자료의 예시에 따르면 최대 길이 2인 [A, B]에 append로 C를 넣으면 [B, C]가 되므로 B가 남는다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "최대 길이 2이고 왼쪽부터 A, B라면 append로 C를 넣은 결과는 B, C다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u7",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.narration[4].text",
+      "text": "시는 오른쪽에 들어가고 반대쪽 에이는 밀려나, 결과는 비, 시가 됩니다.",
+      "cueId": "add_c",
+      "verdict": "supported",
+      "claim": "C를 오른쪽에 추가하면 반대쪽의 A가 밀려나 결과가 왼쪽부터 B, C가 된다.",
+      "reason": "append는 오른쪽에 추가하며, 자료가 동일한 A, B, C 예시의 결과를 B, C로 명시한다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "append는 오른쪽, appendleft는 왼쪽에 추가한다."
+        },
+        {
+          "sourceId": "python-deque",
+          "quote": "최대 길이 2이고 왼쪽부터 A, B라면 append로 C를 넣은 결과는 B, C다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u8",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.narration[5].text",
+      "text": "즉, 가득 찬 maxlen deque의 append는 반대쪽 값을 버리고 길이를 유지합니다.",
+      "cueId": "summary",
+      "verdict": "supported",
+      "claim": "가득 찬 maxlen deque에서 append하면 반대쪽 값을 버리고 deque의 길이를 유지한다.",
+      "reason": "근거 자료가 해당 append 동작과 길이 유지를 직접 뒷받침한다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "가득 찬 deque에 append 또는 appendleft로 추가하면 반대쪽 끝의 값이 밀려나 길이가 유지된다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u9",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[0].headline",
+      "text": "가득 찬 deque에\nC를 더 넣으면?",
+      "sceneId": "scene_question",
+      "verdict": "uncertain",
+      "claim": "가득 찬 deque에 C를 더하면 어떤 값이 사라진다는 전제를 담은 질문이다.",
+      "reason": "장면 문구에는 append가 명시되지 않았다. 자료상 append와 appendleft는 반대쪽 값을 버리지만 insert는 IndexError를 일으키므로, 이 문구만으로 결과를 확정할 수 없다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u10",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[1].headline",
+      "text": "maxlen은\n최대 원소 수",
+      "sceneId": "scene_rule",
+      "verdict": "supported",
+      "claim": "maxlen은 deque의 최대 원소 수를 뜻한다.",
+      "reason": "근거 자료의 maxlen 설명과 일치한다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "maxlen은 최대 원소 수를 제한한다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u11",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[1].body",
+      "text": "정해진 길이를 넘지 않아요",
+      "sceneId": "scene_rule",
+      "verdict": "supported",
+      "claim": "maxlen이 설정된 deque는 정해진 최대 길이를 넘지 않는다.",
+      "reason": "자료는 maxlen이 최대 원소 수를 제한한다고 설명하고, 가득 찬 상태의 끝 추가에서는 값이 밀려나 길이가 유지된다고 명시한다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "maxlen은 최대 원소 수를 제한한다. 가득 찬 deque에 append 또는 appendleft로 추가하면 반대쪽 끝의 값이 밀려나 길이가 유지된다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u12",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[2].headline",
+      "text": "최대 길이 2\n두 칸이 찬 상태",
+      "sceneId": "scene_full",
+      "verdict": "not_factual",
+      "claim": "최대 길이 2이며 두 칸이 찬 가상 예시의 초기 상태를 제시한다.",
+      "reason": "연산 결과가 아니라 예시에서 사용할 입력 상태의 설정이다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u13",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[2].body",
+      "text": "왼쪽부터 A, B",
+      "sceneId": "scene_full",
+      "verdict": "not_factual",
+      "claim": "가상 deque의 초기 원소 순서를 왼쪽부터 A, B로 설정한다.",
+      "reason": "검증 대상 연산의 결과가 아닌 예시 입력 설정이다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u14",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[2].cards[0].label",
+      "text": "A",
+      "sceneId": "scene_full",
+      "cardId": "card_a",
+      "verdict": "not_factual",
+      "claim": "가상 초기 입력의 첫 번째 카드를 A로 표시한다.",
+      "reason": "예시 입력값의 이름만 표시하며 독립적인 사실 주장이 없다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u15",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[2].cards[1].label",
+      "text": "B",
+      "sceneId": "scene_full",
+      "cardId": "card_b",
+      "verdict": "not_factual",
+      "claim": "가상 초기 입력의 두 번째 카드를 B로 표시한다.",
+      "reason": "예시 입력값의 이름만 표시하며 독립적인 사실 주장이 없다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u16",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[3].headline",
+      "text": "오른쪽에 C 추가",
+      "sceneId": "scene_append",
+      "verdict": "not_factual",
+      "claim": "가상 예시에서 C를 deque의 오른쪽에 추가하는 연산을 설정한다.",
+      "reason": "실행할 가상 연산을 제시할 뿐 결과에 관한 사실을 단정하지 않는다.",
+      "evidence": []
+    },
+    {
+      "unitId": "e0-u17",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[3].body",
+      "text": "반대쪽 A가 밀려나요",
+      "sceneId": "scene_append",
+      "verdict": "supported",
+      "claim": "[A, B]로 가득 찬 최대 길이 2의 deque에 C를 오른쪽으로 append하면 반대쪽 A가 밀려난다.",
+      "reason": "append는 오른쪽 추가이고, 가득 찬 경우 반대쪽 끝이 밀려난다. 따라서 왼쪽부터 A, B인 상태에서는 A가 제거된다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "append는 오른쪽, appendleft는 왼쪽에 추가한다."
+        },
+        {
+          "sourceId": "python-deque",
+          "quote": "가득 찬 deque에 append 또는 appendleft로 추가하면 반대쪽 끝의 값이 밀려나 길이가 유지된다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u18",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[3].cards[0].label",
+      "text": "B",
+      "sceneId": "scene_append",
+      "cardId": "card_b",
+      "verdict": "supported",
+      "claim": "append 이후 결과 deque의 왼쪽 원소는 B이다.",
+      "reason": "자료가 최대 길이 2의 [A, B]에 C를 append한 결과를 B, C로 명시하므로 첫 원소 B가 맞다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "최대 길이 2이고 왼쪽부터 A, B라면 append로 C를 넣은 결과는 B, C다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u19",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[3].cards[1].label",
+      "text": "C",
+      "sceneId": "scene_append",
+      "cardId": "card_c",
+      "verdict": "supported",
+      "claim": "append 이후 결과 deque의 오른쪽 원소는 C이다.",
+      "reason": "자료가 해당 예시의 결과를 왼쪽부터 B, C로 명시하므로 두 번째 원소 C가 맞다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "최대 길이 2이고 왼쪽부터 A, B라면 append로 C를 넣은 결과는 B, C다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u20",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[4].headline",
+      "text": "반대쪽은 버리고\n길이는 그대로",
+      "sceneId": "scene_result",
+      "verdict": "supported",
+      "claim": "가득 찬 maxlen deque에 append하면 반대쪽 값을 버리면서 길이는 유지된다.",
+      "reason": "근거 자료가 반대쪽 값의 제거와 길이 유지를 직접 명시한다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "가득 찬 deque에 append 또는 appendleft로 추가하면 반대쪽 끝의 값이 밀려나 길이가 유지된다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u21",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[4].body",
+      "text": "append 결과: B, C",
+      "sceneId": "scene_result",
+      "verdict": "supported",
+      "claim": "최대 길이 2의 [A, B]에 C를 append한 결과는 [B, C]이다.",
+      "reason": "근거 자료에 같은 초기값과 연산의 결과가 그대로 제시되어 있다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "최대 길이 2이고 왼쪽부터 A, B라면 append로 C를 넣은 결과는 B, C다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u22",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[4].cards[0].label",
+      "text": "B",
+      "sceneId": "scene_result",
+      "cardId": "card_b",
+      "verdict": "supported",
+      "claim": "최종 append 결과의 왼쪽 카드는 B이다.",
+      "reason": "자료가 결과 순서를 B, C로 명시하므로 왼쪽 카드 B가 맞다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "최대 길이 2이고 왼쪽부터 A, B라면 append로 C를 넣은 결과는 B, C다."
+        }
+      ]
+    },
+    {
+      "unitId": "e0-u23",
+      "planId": "cs-auto-live-01-b01-01",
+      "location": "story.scenes[4].cards[1].label",
+      "text": "C",
+      "sceneId": "scene_result",
+      "cardId": "card_c",
+      "verdict": "supported",
+      "claim": "최종 append 결과의 오른쪽 카드는 C이다.",
+      "reason": "자료가 결과 순서를 B, C로 명시하므로 오른쪽 카드 C가 맞다.",
+      "evidence": [
+        {
+          "sourceId": "python-deque",
+          "quote": "최대 길이 2이고 왼쪽부터 A, B라면 append로 C를 넣은 결과는 B, C다."
+        }
+      ]
+    }
+  ],
+  "consistency": [
+    {
+      "planId": "cs-auto-live-01-b01-01",
+      "verdict": "consistent",
+      "reason": "낭독과 화면 모두 최대 길이 2의 초기 상태 [A, B]에서 C를 오른쪽으로 추가하고 A가 밀려나 [B, C]가 되며 길이 2가 유지되는 같은 흐름을 나타낸다. 카드 순서, A/B/C 대응, carry와 강조 동작에도 서로 반대되는 값이나 연산 순서가 없다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "python-structures",
+      "title": "Python 공식 튜토리얼 스택·큐 확인 노트",
+      "path": "samples/content/sources/python-structures.md",
+      "url": "https://docs.python.org/3/tutorial/datastructures.html",
+      "sha256": "585b0344ec368743a13987ef25c308e6d754b935a078b8b6c346cf0024d3be93"
+    },
+    {
+      "id": "qt-undo",
+      "title": "Qt 공식 문서 실행 취소 스택 확인 노트",
+      "path": "samples/content/sources/qt-undo.md",
+      "url": "https://doc.qt.io/qt-6/qundostack.html",
+      "sha256": "5c54b25525b3f53482aaf3580a1e4b2ca2f8c28af3d23584b8f1a4c0851be830"
+    },
+    {
+      "id": "python-deque",
+      "title": "Python 공식 문서 양방향 큐 연산 확인 노트",
+      "path": "samples/period-auto/sources/python-deque.md",
+      "url": "https://docs.python.org/3/library/collections.html#collections.deque",
+      "sha256": "490bd0a392adad206bde1b261cd0e69bdc86d9dc0f0de4acd16b8667410ec621"
+    }
+  ],
+  "issues": [],
+  "evidence": [
+    {
+      "directory": "provider",
+      "responseSha256": "1f04b4538c6c6fcc31d79f5609f7e91448243049e60a994373f677a16c6cc5b6",
+      "sourceSnapshotSha256": "f7c0d491ecbe906760e9d094ae3e0af6426f1232295eecbd8c17242f2ec32d89"
+    }
+  ],
+  "limitations": [
+    "등록된 자료 스냅샷에 대한 모델 기반 검증이며 보편적인 진실이나 최신성을 보장하지 않습니다.",
+    "코드는 모든 텍스트 항목의 판정과 실제 근거 구절의 존재를 검사하지만, 근거가 주장을 뒷받침하는지는 모델이 판단합니다.",
+    "화면의 실제 렌더링 품질, 음성 발음, 최종 게시 승인은 별도 검사 대상입니다."
+  ],
+  "reportDirectory": "runs/cs-auto-live-cs-auto-live-01-b01-01/artifacts/content/f6cdb9f3-abc1-47e2-bb60-4760b03ec522/check-4f3374b4-341",
+  "reportPath": "runs/cs-auto-live-cs-auto-live-01-b01-01/artifacts/content/f6cdb9f3-abc1-47e2-bb60-4760b03ec522/check-4f3374b4-341/report.json"
+}

@@ -1,0 +1,17 @@
+{
+  "mode": "required",
+  "sources": [
+    {
+      "id": "python-structures",
+      "title": "Python 공식 튜토리얼 스택·큐 확인 노트",
+      "path": "samples/content/sources/python-structures.md",
+      "url": "https://docs.python.org/3/tutorial/datastructures.html"
+    },
+    {
+      "id": "qt-undo",
+      "title": "Qt 공식 문서 실행 취소 스택 확인 노트",
+      "path": "samples/content/sources/qt-undo.md",
+      "url": "https://doc.qt.io/qt-6/qundostack.html"
+    }
+  ]
+}

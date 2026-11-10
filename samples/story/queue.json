@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "title": "큐는 왜 먼저 들어온 값이 먼저 나올까?",
+  "durationSeconds": 30,
+  "narration": [
+    { "id": "hook", "text": "먼저 줄 선 데이터, 먼저 나갈 수 있을까요?" },
+    { "id": "idea", "text": "큐는 뒤에서 값을 넣고, 앞에서 꺼내는 자료 구조입니다." },
+    { "id": "show", "text": "에이가 먼저 들어오고, 그 뒤에 비가 들어왔다고 해보죠." },
+    { "id": "compare", "text": "에이가 먼저 나옵니다. 먼저 들어왔기 때문이죠." },
+    { "id": "remaining", "text": "비가 그다음 나오죠. 이 순서가 선입선출입니다." },
+    { "id": "finish", "text": "작업을 들어온 순서대로 처리하는 대기열을 만들 때 활용할 수 있습니다." }
+  ],
+  "scenes": [
+    { "id": "question", "type": "question", "from": "hook", "headline": "줄 선 데이터,\n무엇부터 나갈까?" },
+    { "id": "definition", "type": "explanation", "from": "idea", "headline": "뒤에서 넣고\n앞에서 꺼내요", "body": "먼저 들어온 값이\n줄의 맨 앞에 있습니다." },
+    { "id": "insert", "type": "cards", "from": "show", "headline": "A가 먼저,\n그 뒤에 B", "body": "들어온 순서  A → B", "cards": [{ "id": "a", "label": "A" }, { "id": "b", "label": "B" }] },
+    { "id": "remove", "type": "cards", "from": "compare", "headline": "먼저 온 A가\n먼저 나옵니다", "body": "꺼내는 순서도  A → B", "cards": [{ "id": "a", "label": "A" }, { "id": "b", "label": "B" }], "carry": ["a", "b"], "actions": [{ "type": "highlight", "target": "a", "at": "compare" }] },
+    { "id": "last", "type": "cards", "from": "remaining", "headline": "그다음은 B", "body": "먼저 넣은 값을 먼저 꺼내요.", "cards": [{ "id": "b", "label": "B" }], "carry": ["b"], "actions": [{ "type": "highlight", "target": "b", "at": "remaining" }] },
+    { "id": "summary", "type": "conclusion", "from": "finish", "headline": "큐 = 선입선출", "body": "FIFO\n예시 · 순서대로 처리하는 대기열" }
+  ]
+}

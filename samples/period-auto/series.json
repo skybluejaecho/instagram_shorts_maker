@@ -1,0 +1,50 @@
+{
+  "id": "cs-auto-live",
+  "name": "CS 신규 자동 기획·기간 제작 통합 검증",
+  "audience": "자료구조를 처음 배우는 사람",
+  "topics": [
+    "스택",
+    "큐"
+  ],
+  "defaultDurationSeconds": 30,
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "adapter": "pipeline/story/adapter.cjs",
+  "renderProfile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "contentReview": {
+    "mode": "required",
+    "sources": [
+      {
+        "id": "python-structures",
+        "title": "Python 공식 튜토리얼 스택·큐 확인 노트",
+        "path": "samples/content/sources/python-structures.md",
+        "url": "https://docs.python.org/3/tutorial/datastructures.html"
+      },
+      {
+        "id": "qt-undo",
+        "title": "Qt 공식 문서 실행 취소 스택 확인 노트",
+        "path": "samples/content/sources/qt-undo.md",
+        "url": "https://doc.qt.io/qt-6/qundostack.html"
+      },
+      {
+        "id": "python-deque",
+        "title": "Python 공식 문서 양방향 큐 연산 확인 노트",
+        "path": "samples/period-auto/sources/python-deque.md",
+        "url": "https://docs.python.org/3/library/collections.html#collections.deque"
+      }
+    ]
+  }
+}

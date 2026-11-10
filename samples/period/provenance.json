@@ -1,0 +1,46 @@
+{
+  "description": "기존 CS 대본의 그대로인 복사본. 새 콘텐츠 생성이나 내용 재검증을 위한 예제가 아닙니다.",
+  "copiedAt": "2026-11-09T06:08:45.262Z",
+  "inputs": [
+    {
+      "id": "stack",
+      "sourceSeriesId": "story-demo",
+      "sourcePlanId": "stack",
+      "sourceInput": "samples/story/stack.json",
+      "fixture": "samples/period/stack.json",
+      "sha256": "610ccd295177527897077416c2446b8d09733b035a8e6ba539bd45b5969765ae"
+    },
+    {
+      "id": "queue",
+      "sourceSeriesId": "story-demo",
+      "sourcePlanId": "queue",
+      "sourceInput": "samples/story/queue.json",
+      "fixture": "samples/period/queue.json",
+      "sha256": "b7b14a05f733180e2888eff3e72d4c7012c7f9d5f5baad75991611126891f6f7"
+    },
+    {
+      "id": "peek",
+      "sourceSeriesId": "story-demo",
+      "sourcePlanId": "auto-cs-01-01",
+      "sourceInput": "planning/inputs/story-demo-auto-cs-01-01-dc04f010-c84b-46fb-9e54-b9da8a6ca4a8.json",
+      "fixture": "samples/period/peek.json",
+      "sha256": "4b5ce2b83981bb4f1a2281180a47cdeb7c54218e55f59ba38c6f412356d65b32"
+    },
+    {
+      "id": "front-rear",
+      "sourceSeriesId": "story-demo",
+      "sourcePlanId": "auto-cs-01-02",
+      "sourceInput": "planning/inputs/story-demo-auto-cs-01-02-c8635266-75aa-4c08-b01e-02e5ed275d62.json",
+      "fixture": "samples/period/front-rear.json",
+      "sha256": "8190971ad7189b0442ce52c89cab96fdd23e78216d2baaf24cf97d6c6170a878"
+    },
+    {
+      "id": "empty-stack",
+      "sourceSeriesId": "story-demo",
+      "sourcePlanId": "auto-cs-01-03",
+      "sourceInput": "planning/inputs/story-demo-auto-cs-01-03-a3affe0d-c7e8-4c97-902f-d8379ef33db2.json",
+      "fixture": "samples/period/empty-stack.json",
+      "sha256": "f7143898b18fd3ee490ccd15de8c80581d04936850a357b00d583a1411559f57"
+    }
+  ]
+}
