@@ -70,10 +70,12 @@ async function inspectReview(workDir, stages) {
       !render?.outputs?.['video.mp4'] || !verify?.outputs?.['report.json']) return view;
 
   const visual = stages.some(stage => stage.id === 'visual') ? state.stages.visual : undefined;
+  const content = stages.some(stage => stage.id === 'content') ? state.stages.content : undefined;
   view.revision = createHash('sha256').update(JSON.stringify({
     renderDirectory: render.dir, renderKey: render.key, video: render.outputs['video.mp4'],
     verificationKey: verify.key, report: verify.outputs['report.json'],
     ...(visual ? { visualReview: { key: visual.key, report: visual.outputs['report.json'] } } : {}),
+    ...(content ? { contentReview: { key: content.key, report: content.outputs['report.json'] } } : {}),
   })).digest('hex');
   view.videoPath = artifactPath(workDir, render.dir, 'video.mp4');
   view.reportPath = artifactPath(workDir, verify.dir, 'report.json');

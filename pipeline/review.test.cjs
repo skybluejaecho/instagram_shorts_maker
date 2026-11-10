@@ -130,6 +130,61 @@ test('visual policy and warning changes require fresh approval even when the MP4
   await assert.rejects(job.record({ action: 'approve', revision: changed.revision }), /current.*verified|Rebuild/i);
 });
 
+test('changed content evidence requires fresh approval while unchanged media remains reusable', async t => {
+  const job = fixture(t);
+  let evidence = 'initial reference';
+  job.stages.unshift({ id: 'content', validationOnly: true,
+    inputs: () => ({ evidence }), outputs: ['report.json'],
+    async run({ dir }) {
+      job.calls.push('content');
+      fs.writeFileSync(path.join(dir, 'report.json'), JSON.stringify({ status: 'passed', evidence }));
+    } });
+  const first = await job.run();
+  const original = await job.inspect();
+  await job.record({ action: 'approve', revision: original.revision });
+  job.calls.length = 0;
+  await job.run();
+  assert.deepEqual(job.calls, []);
+  assert.equal((await job.inspect()).status, 'approved');
+
+  evidence = 'corrected reference';
+  assert.equal((await job.inspect()).status, 'needs_rebuild');
+  const checked = await job.run();
+  assert.deepEqual(job.calls, ['content']);
+  assert.equal(checked.stages.speech.dir, first.stages.speech.dir);
+  assert.equal(checked.stages.render.dir, first.stages.render.dir);
+  const current = await job.inspect();
+  assert.equal(current.videoPath, original.videoPath);
+  assert.notEqual(current.revision, original.revision);
+  assert.equal(current.status, 'ready_for_review');
+  await assert.rejects(job.record({ action: 'approve', revision: original.revision }), /revision has changed/i);
+  await job.record({ action: 'approve', revision: current.revision });
+  assert.equal((await job.inspect()).status, 'approved');
+});
+
+test('enabling a content gate does not inherit a prior approval without evidence review', async t => {
+  const job = fixture(t);
+  await job.run();
+  const legacy = await job.inspect();
+  const approved = await job.record({ action: 'approve', revision: legacy.revision });
+  job.calls.length = 0;
+  job.stages.unshift({ id: 'content', validationOnly: true,
+    inputs: () => ({ required: true }), outputs: ['report.json'],
+    async run({ dir }) {
+      job.calls.push('content');
+      fs.writeFileSync(path.join(dir, 'report.json'), '{"status":"passed"}');
+    } });
+  assert.equal((await job.inspect()).status, 'needs_rebuild');
+  await job.run();
+  assert.deepEqual(job.calls, ['content']);
+  const current = await job.inspect();
+  assert.equal(current.videoPath, legacy.videoPath);
+  assert.notEqual(current.revision, legacy.revision);
+  assert.equal(current.status, 'ready_for_review');
+  assert.deepEqual(current.history, approved.history);
+  await assert.rejects(job.record({ action: 'approve', revision: legacy.revision }), /revision has changed/i);
+});
+
 test('a targeted change request survives no-op runs and a new video returns to review with its history', async t => {
   const job = fixture(t);
   const first = await job.run();
