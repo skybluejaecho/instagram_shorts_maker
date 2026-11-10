@@ -62,6 +62,24 @@ test('a new common series exposes effective defaults without executing its adapt
   assert.equal(fs.existsSync(path.join(root, 'runs')), false);
 });
 
+test('constructor is a valid new series ID and only own catalog entries count as existing', async t => {
+  const { root, spec, run } = fixture(t);
+  const requested = { ...spec, id: 'constructor' };
+  const fresh = await run(requested);
+  assert.equal(fresh.canRegister, true);
+  assert.equal(fresh.existing, false);
+
+  fs.mkdirSync(path.join(root, 'planning'));
+  fs.writeFileSync(path.join(root, 'planning/catalog.json'), JSON.stringify({ version: 1,
+    series: { constructor: fresh.normalized }, plans: {}, episodes: {}, batches: {} }));
+  const registered = await run(requested);
+  assert.equal(registered.canRegister, true);
+  assert.equal(registered.existing, true);
+  const changed = await run({ ...requested, name: 'Changed name' });
+  assert.equal(changed.canRegister, false);
+  assert.ok(changed.errors.some(error => error.code === 'SERIES_CONFLICT'));
+});
+
 test('unsupported settings, missing voice and missing evidence are reported together with actionable fields', async t => {
   const { spec, run } = fixture(t);
   const bad = structuredClone(spec);

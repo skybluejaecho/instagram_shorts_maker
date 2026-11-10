@@ -178,7 +178,8 @@ async function checkSeries(root, spec, options = {}) {
   startErrors = errors.length; startWarnings = warnings.length;
   if (report.normalized) {
     try {
-      const existing = readCatalog(root).series[report.normalized.id];
+      const registered = readCatalog(root).series;
+      const existing = Object.hasOwn(registered, report.normalized.id) ? registered[report.normalized.id] : undefined;
       report.existing = Boolean(existing);
       if (existing && JSON.stringify(existing) !== JSON.stringify(report.normalized)) error('SERIES_CONFLICT', 'id', '같은 ID의 시리즈가 다른 설정으로 등록되어 있습니다. 새 ID를 사용하거나 지원하는 정책 변경 명령을 사용하세요.');
     } catch (cause) { error('CATALOG_UNREADABLE', 'catalog', '시리즈 카탈로그를 읽을 수 없습니다. ' + cause.message); }
