@@ -1,0 +1,27 @@
+# Local production state and generated episode inputs (back up together).
+/runs/
+/planning/catalog.json
+/planning/inputs/
+/planning/catalog-*.tmp
+
+# Rendered deliverables and sample build output.
+/renders/
+/samples/*/generated/
+/samples/*/generated-final/
+/samples/*/.speech-output-*/
+
+# Reinstallable dependencies and renderer cache, at any depth.
+node_modules/
+.hyperframes/
+
+# Reserved local-only locations; these rules do not create directories.
+/local/
+/backups/
+
+# Credentials stay local; sanitized environment examples may be committed.
+.env
+.env.*
+!.env.example
+!.env.*.example
+/secrets/
+/.secrets/
