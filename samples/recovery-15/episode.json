@@ -1,0 +1,13 @@
+{
+  "title": "반값이 된 가격, 얼마나 올라야 할까?",
+  "beats": [
+    { "id": "hook", "narration": "반값이 된 가격, 얼마나 올라야 돌아올까요?" },
+    { "id": "drop-start", "narration": "백에서" },
+    { "id": "low", "narration": "오십이 됐습니다." },
+    { "id": "partial-start", "narration": "절반을 더하면" },
+    { "id": "partial", "narration": "칠십오." },
+    { "id": "recovery-start", "narration": "오십을 더해야 다시" },
+    { "id": "full", "narration": "백이 됩니다. 반값에서" },
+    { "id": "conclusion", "narration": "백 퍼센트 올라야 하죠." }
+  ]
+}

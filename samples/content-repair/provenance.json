@@ -1,0 +1,29 @@
+{
+  "description": "Previously held CS maxlen episode and real production content report. Episode and plan fixtures are exact copies; the report changes only reportDirectory/reportPath to repository-relative paths for publication. The archived decision is replayed only to start a reproducible repair; proposal, content rechecks, visual review and MP4 are live when explicitly executed.",
+  "inputs": [
+    {
+      "fixture": "samples/content-repair/original-episode.json",
+      "source": "runs/_periods/auto-validation-cs-auto-live-01/operator-fixes/append-condition/before-input.json",
+      "sha256": "5f507fbeefbb7448eb86ffa688de9ca7e731442e9d198199fb5c57ff2267ca02"
+    },
+    {
+      "fixture": "samples/content-repair/original-plan.json",
+      "source": "runs/_periods/auto-validation-cs-auto-live-01/operator-fixes/append-condition/before-plan.json",
+      "sha256": "56808cfa341a06494f6b08bfbfe9eebe9ba8dad9d6242492cfd196815901f680"
+    },
+    {
+      "fixture": "samples/content-repair/archived-hold-report.json",
+      "source": "runs/cs-auto-live-cs-auto-live-01-b01-01/artifacts/content/f6cdb9f3-abc1-47e2-bb60-4760b03ec522/report.json",
+      "sha256": "0ae6806eebf590b109e1a56ab1d78638e2f7f1434b2e93acc36b52fab0760b5a",
+      "originalFixtureSha256": "a6f29a418a5ed4d7aefe9f05fd781a210ab2f8a7d6fc2a25f8ef81a47f87cdd4",
+      "normalization": {
+        "fields": [
+          "reportDirectory",
+          "reportPath"
+        ],
+        "kind": "repository-relative-display-paths",
+        "preserved": "All content decisions, evidence, entryHash and sourceHash are unchanged."
+      }
+    }
+  ]
+}

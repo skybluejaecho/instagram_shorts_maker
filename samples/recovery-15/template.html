@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>반값이 된 가격, 얼마나 올라야 할까?</title>
+  <style>
+    {{motionStyles}}
+    @font-face {
+      font-family: Malgun;
+      font-weight: 700;
+      src: local("Malgun Gothic Bold"), local("맑은 고딕 Bold");
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main {
+      --ink: #202d2b;
+      --paper: #f6f4ec;
+      --track: #e1e1d7;
+      --loss: #cd5031;
+      --partial: #3656b5;
+      --recovered: #087b64;
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font: 700 42px/1.32 Malgun, sans-serif;
+    }
+    header, .intro, .row, .note, .answer { position: absolute; left: 120px; width: 760px; }
+    header { top: 166px; padding-top: 39px; border-top: 7px solid var(--ink); }
+    h1 { margin: 0; font-size: 73px; line-height: 1.27; letter-spacing: -5px; }
+    .intro {
+      top: 550px; height: 650px; padding: 70px 58px; color: var(--paper);
+      background: var(--ink);
+      animation: fade-out var(--text-fade) ease-in calc({{dropStart}}s - var(--row-lead) - var(--text-fade)) forwards;
+    }
+    .intro small { font: inherit; font-size: 39px; letter-spacing: -2px; }
+    .intro strong {
+      display: block; margin: 54px 0 60px;
+      font: bold 194px/1 Arial, sans-serif; letter-spacing: -13px;
+    }
+    .intro-line {
+      height: 62px;
+      background: repeating-linear-gradient(135deg, #64716a 0 3px, transparent 3px 18px);
+      border: 2px solid #899389;
+    }
+    .intro-line::before {
+      content: ""; display: block; width: 50%; height: 100%; background: #f1a38a;
+    }
+    .row { height: 183px; }
+    .row.first {
+      top: 575px; --begin: {{dropStart}}s; --finish: {{low}}s;
+      --from: 1; --to: .5; --color: var(--loss);
+    }
+    .row.second {
+      top: 825px; --begin: {{partialStart}}s; --finish: {{partial}}s;
+      --from: .5; --to: .75; --color: var(--partial);
+    }
+    .row.third {
+      top: 1075px; --begin: {{recoveryStart}}s; --finish: {{full}}s;
+      --from: .5; --to: 1; --color: var(--recovered);
+    }
+    .row h2 { margin: 0; font-size: 42px; letter-spacing: -2.5px; }
+    .equation { margin: 6px 0 0; color: #48554e; font: bold 35px/1 Arial, sans-serif; }
+    .result {
+      position: absolute; top: -14px; right: 0; margin: 0;
+      color: var(--color); font: bold 77px/1 Arial, sans-serif;
+      letter-spacing: -4px;
+    }
+    .track { position: absolute; top: 110px; width: 100%; height: 40px; background: var(--track); }
+    .track::after {
+      content: ""; position: absolute; top: 100%; left: 50%; right: 0; height: 12px;
+      border-left: 2px solid #758279; border-right: 2px solid #758279;
+    }
+    .fill {
+      width: 100%; height: 100%; background: var(--color);
+    }
+    .note {
+      top: 1380px; padding-top: 24px; border-top: 2px solid #b6bcb4;
+      font-size: 40px; line-height: 1.56; letter-spacing: -2px;
+      margin: 0; opacity: 0;
+      animation: fade-in var(--text-fade) var(--enter-easing) var(--in) forwards,
+        fade-out var(--text-fade) ease-in calc(var(--out) - var(--text-fade)) forwards;
+    }
+    .answer {
+      top: 1340px; padding: 29px 36px 30px; color: var(--paper); background: #164b40;
+      --finish: {{conclusion}}s;
+    }
+    .answer p { margin: 0; font-size: 35px; letter-spacing: -1.5px; }
+    .answer strong { display: block; margin-top: 8px; font: bold 100px/1 Arial, sans-serif; letter-spacing: -5px; }
+  </style>
+</head>
+<body>
+  <main data-composition-id="recovery-15" data-width="1080" data-height="1920"
+        data-start="0" data-duration="15" data-fps="30" data-no-timeline>
+    <header><h1>반값이 된 가격,<br>얼마나 올라야 할까?</h1></header>
+    <section class="intro" aria-label="가격이 50퍼센트 하락했다">
+      <small>처음 가격에서</small>
+      <strong>−50%</strong>
+      <div class="intro-line"></div>
+    </section>
+    <section class="row first motion-row">
+      <h2>원래 가격에서 반값으로</h2>
+      <p class="equation">100 ÷ 2</p>
+      <p class="result motion-result">50</p>
+      <div class="track"><div class="fill motion-gauge"></div></div>
+    </section>
+    <section class="row second motion-row">
+      <h2>50의 절반을 더하면</h2>
+      <p class="equation">50 + 25</p>
+      <p class="result motion-result">75</p>
+      <div class="track"><div class="fill motion-gauge"></div></div>
+    </section>
+    <section class="row third motion-row">
+      <h2>잃은 50을 더하면</h2>
+      <p class="equation">50 + 50</p>
+      <p class="result motion-result">100</p>
+      <div class="track"><div class="fill motion-gauge"></div></div>
+    </section>
+    <p class="note" style="--in: {{low}}s; --out: {{partialStart}}s">현재 가격은 50입니다.</p>
+    <p class="note" style="--in: {{partialStart}}s; --out: {{recoveryStart}}s">50% 상승은 현재 가격 50에<br>25를 더하는 것입니다.</p>
+    <p class="note" style="--in: {{recoveryStart}}s; --out: {{conclusion}}s">원래 가격 100으로 돌아가려면<br>현재 가격 50만큼 더 올라야 합니다.</p>
+    <div class="answer motion-result">
+      <p>현재 가격 50을 기준으로 필요한 상승률</p>
+      <strong>+100%</strong>
+    </div>
+    <audio id="narration" src="narration.wav" data-start="0"
+           data-duration="{{voiceDuration}}" data-track-index="1" data-volume="1"></audio>
+  </main>
+</body>
+</html>

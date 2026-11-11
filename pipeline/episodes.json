@@ -1,0 +1,10 @@
+{
+  "binary-search-30": {
+    "adapter": "samples/binary-search-30/adapter.cjs",
+    "episode": "samples/binary-search-30/episode.json"
+  },
+  "recovery-15": {
+    "adapter": "samples/recovery-15/adapter.cjs",
+    "episode": "samples/recovery-15/episode.json"
+  }
+}

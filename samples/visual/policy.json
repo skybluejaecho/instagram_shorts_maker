@@ -1,0 +1,8 @@
+{
+  "mode": "required",
+  "safeArea": { "top": 120, "right": 96, "bottom": 160, "left": 96 },
+  "minFontPx": { "headline": 54, "body": 32, "card": 32, "brand": 28 },
+  "charsPerSecond": 12,
+  "minSceneSeconds": 1.2,
+  "overlapTolerancePx": 4
+}

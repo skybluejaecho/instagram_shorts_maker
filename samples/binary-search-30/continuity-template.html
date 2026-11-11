@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>이진 탐색은 왜 정렬이 필요할까?</title>
+  <style>
+    {{motionStyles}}
+    @font-face { font-family: Malgun; font-weight: 700; src: local("Malgun Gothic Bold"), local("맑은 고딕 Bold"); }
+    * { box-sizing: border-box; }
+    body, p, h1, h2, ol { margin: 0; padding: 0; }
+    main {
+      --episode-duration: {{durationSeconds}}s;
+      position: relative; width: 1080px; height: 1920px; overflow: hidden;
+      color: #f2f5ee; background: #172f44; font: 700 44px/1.44 Malgun, sans-serif; letter-spacing: -2px;
+      animation: backdrop var(--episode-duration) var(--gauge-easing) both;
+    }
+    .brand, .rail, .tile { position: absolute; animation-duration: var(--episode-duration); animation-fill-mode: both; }
+    .brand { left: 0; top: 0; z-index: 2; color: #b0edca; font-size: 48px; animation-name: move-brand; animation-timing-function: var(--gauge-easing); }
+    .rail { left: 0; top: 0; width: 804px; height: 7px; background: #a3d7bd; transform-origin: left; animation-name: move-rail; animation-timing-function: var(--gauge-easing); }
+    .tile {
+      top: -53px; left: -45px; width: 90px; height: 106px; border-radius: 9px;
+      list-style: none; display: grid; place-items: center;
+      font: bold 52px/1 Arial, sans-serif; letter-spacing: -2px;
+      animation-timing-function: var(--gauge-easing),ease-out,steps(1,end);
+    }
+    .copy {
+      position: absolute; left: 96px; width: 804px; opacity: 0;
+      animation: arrive .18s var(--enter-easing) var(--in) forwards,
+        leave .13s ease-in calc(var(--out) - .13s) forwards;
+    }
+    .copy.last { animation: arrive .18s var(--enter-easing) var(--in) forwards; }
+    @keyframes arrive { from { opacity: var(--entry-opacity, 0); transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes leave { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-7px); } }
+    .question { --entry-opacity: 1; top: 615px; font-size: 116px; line-height: 1.2; letter-spacing: -7px; white-space: pre-line; }
+    .head { top: 425px; }
+    .head .lead { color: #c4dbd6; font-size: 48px; }
+    .head h2 { margin-top: 25px; font: bold 134px/1.1 Arial,sans-serif; letter-spacing: -8px; }
+    .head .topic { font: 700 81px/1.18 Malgun,sans-serif; letter-spacing: -5px; white-space: pre-line; }
+    .head .target { color: #f9da8a; }
+    .foot { top: 1240px; font-size: 47px; line-height: 1.48; }
+    .foot strong { color: #ffd67e; }
+    .foot.trail { font: bold 81px/1.2 Arial,sans-serif; letter-spacing: -3px; }
+    .foot.counter strong { color: #ffc2aa; }
+    .bracket { top: 1070px; width: 398px; border-top: 6px solid #ffc2aa; padding-top: 15px; color: #ffc2aa; font-size: 37px; }
+    {{sharedMotion}}
+  </style>
+</head>
+<body>
+  <main data-composition-id="binary-continuity" data-start="0" data-duration="{{durationSeconds}}"
+        data-width="1080" data-height="1920" data-fps="30" data-no-timeline>
+    <div class="brand">이진 탐색</div>
+    <div class="rail" aria-hidden="true"></div>
+    <ol aria-label="탐색 배열">{{sharedTiles}}</ol>
+
+    <h1 class="copy question" style="--in:0s;--out:{{setupIn}}s">{{questionTitle}}</h1>
+    <header class="copy head" style="--in:{{setupIn}}s;--out:{{firstCutIn}}s">
+      <p class="lead">찾을 값</p><h2 class="target">{{target}}</h2>
+    </header>
+    <p class="copy foot" style="--in:{{setupIn}}s;--out:{{firstCutIn}}s">작은 값부터 정렬한 여덟 칸.<br>가운데가 둘이면 왼쪽 칸을 고릅니다.</p>
+
+    <header class="copy head" style="--in:{{firstCutIn}}s;--out:{{secondCutIn}}s">
+      <p class="lead">첫 번째 비교</p><h2>{{firstCutTitle}}</h2>
+    </header>
+    <p class="copy foot" style="--in:{{firstCutIn}}s;--out:{{right}}s">가운데 <strong>{{cell3}}</strong>과 그 왼쪽은<br>모두 {{target}}보다 작습니다.</p>
+    <p class="copy foot" style="--in:{{right}}s;--out:{{secondCutIn}}s">왼쪽 네 칸을 제외하면<br><strong>오른쪽 네 칸</strong>만 남습니다.</p>
+
+    <header class="copy head" style="--in:{{secondCutIn}}s;--out:{{discoveryIn}}s">
+      <p class="lead">남은 네 칸의 가운데</p><h2>{{secondCutTitle}}</h2>
+    </header>
+    <p class="copy foot" style="--in:{{secondCutIn}}s;--out:{{left}}s">가운데 <strong>{{cell5}}</strong>과 그 오른쪽은<br>모두 {{target}}보다 큽니다.</p>
+    <p class="copy foot" style="--in:{{left}}s;--out:{{discoveryIn}}s">오른쪽 세 칸을 제외하면<br><strong>왼쪽 한 칸</strong>만 남습니다.</p>
+
+    <header class="copy head" style="--in:{{discoveryIn}}s;--out:{{counterexampleIn}}s">
+      <p class="lead">세 번의 비교</p><h2 class="topic">찾았습니다.</h2>
+    </header>
+    <p class="copy foot trail" style="--in:{{discoveryIn}}s;--out:{{counterexampleIn}}s">{{cell3}} → {{cell5}} → {{target}}</p>
+
+    <header class="copy head last" style="--in:{{counterexampleIn}}s">
+      <p class="lead">가운데 값은 여전히 {{cell3}}</p><h2 class="topic">{{counterexampleTitle}}</h2>
+    </header>
+    <p class="copy bracket last" style="--in:calc({{counterexampleIn}}s + {{counterexampleMove}}s)">버리려던 쪽</p>
+    <p class="copy foot counter last" style="--in:{{counterexampleIn}}s">버리려던 왼쪽에<br>찾는 값 <strong>{{target}}</strong>가 있습니다.</p>
+    <audio id="narration" src="narration.wav" data-start="0" data-duration="{{voiceDuration}}" data-track-index="1"></audio>
+  </main>
+</body>
+</html>

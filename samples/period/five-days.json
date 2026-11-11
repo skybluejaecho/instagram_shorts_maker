@@ -1,0 +1,18 @@
+{
+  "id": "cs-five-days",
+  "seriesId": "period-cs-demo",
+  "startDate": "2026-11-16",
+  "days": 5,
+  "timezone": "Asia/Seoul",
+  "times": [
+    "19:00"
+  ],
+  "batchSize": 2,
+  "planIds": [
+    "stack",
+    "queue",
+    "peek",
+    "front-rear",
+    "empty-stack"
+  ]
+}

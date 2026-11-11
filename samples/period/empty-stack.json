@@ -1,0 +1,130 @@
+{
+  "audience": "자료구조를 처음 배우는 사람",
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "version": 1,
+  "title": "빈 스택에서 pop하기 전에 확인할 것",
+  "durationSeconds": 30,
+  "profile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "narration": [
+    {
+      "id": "empty_q",
+      "text": "빈 스택에서 pop하면 무엇이 나올까요?"
+    },
+    {
+      "id": "empty_rule",
+      "text": "스택이 비어 있다는 건 안에 데이터가 하나도 없어서, 꺼낼 수 있는 값도 없다는 뜻입니다."
+    },
+    {
+      "id": "empty_a",
+      "text": "에이 하나가 든 스택에서 pop하면 에이가 나옵니다."
+    },
+    {
+      "id": "empty_after",
+      "text": "그러면 스택은 카드가 없는 빈 상태가 됩니다."
+    },
+    {
+      "id": "empty_again",
+      "text": "이때 다시 pop하면 꺼낼 값이 없어 언더플로가 발생합니다."
+    },
+    {
+      "id": "empty_check",
+      "text": "따라서 pop 전에는 스택이 비었는지 확인해야 합니다."
+    },
+    {
+      "id": "empty_end",
+      "text": "정리하면 빈 스택에는 pop을 시도하지 않습니다."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "empty_scene_q",
+      "type": "question",
+      "from": "empty_q",
+      "headline": "빈 스택에서\npop하면?",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "empty_scene_rule",
+      "type": "explanation",
+      "from": "empty_rule",
+      "headline": "꺼낼 값이 없음",
+      "body": "정상적인 제거가\n불가능해요",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "empty_scene_a",
+      "type": "cards",
+      "from": "empty_a",
+      "headline": "A 하나인 스택",
+      "body": "첫 pop은 가능",
+      "cards": [
+        {
+          "id": "empty_a_card",
+          "label": "A"
+        }
+      ],
+      "layout": "stack",
+      "carry": [],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "empty_a_card",
+          "at": "empty_a"
+        }
+      ]
+    },
+    {
+      "id": "empty_scene_after",
+      "type": "explanation",
+      "from": "empty_after",
+      "headline": "pop 뒤 빈 상태",
+      "body": "남은 카드가 없어요",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "empty_scene_again",
+      "type": "explanation",
+      "from": "empty_again",
+      "headline": "다시 pop하면",
+      "body": "꺼낼 값이 없어\n언더플로 발생",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "empty_scene_end",
+      "type": "conclusion",
+      "from": "empty_check",
+      "headline": "비었는지 먼저\n확인하기",
+      "body": "빈 스택에는\npop하지 않아요",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    }
+  ]
+}

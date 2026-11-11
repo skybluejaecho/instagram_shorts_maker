@@ -1,0 +1,189 @@
+{
+  "audience": "자료구조를 처음 배우는 사람",
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "version": 1,
+  "title": "원형 큐의 마지막 칸 다음은 왜 0번일까?",
+  "durationSeconds": 30,
+  "profile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "narration": [
+    {
+      "id": "wrap_q",
+      "text": "원형 큐에서 마지막 칸 다음은 어디일까요?"
+    },
+    {
+      "id": "wrap_setup",
+      "text": "세 칸을 0번, 1번, 2번이라 하고 한 칸씩 이동해 봅시다."
+    },
+    {
+      "id": "wrap_zero",
+      "text": "0번의 다음 위치는 1번입니다."
+    },
+    {
+      "id": "wrap_one",
+      "text": "1번에서 한 칸 더 가면 2번입니다."
+    },
+    {
+      "id": "wrap_two",
+      "text": "2번은 마지막 칸이지만, 다음은 큐 밖이 아닙니다."
+    },
+    {
+      "id": "wrap_back",
+      "text": "0번이 다시 다음 위치입니다. 2 더하기 1을 칸 수 3으로 나눈 나머지가 0이기 때문입니다."
+    },
+    {
+      "id": "wrap_end",
+      "text": "정리하면 마지막 인덱스 다음은 첫 인덱스로 이어집니다."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "wrap_question",
+      "type": "question",
+      "from": "wrap_q",
+      "headline": "마지막 다음은?",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "wrap_explain",
+      "type": "explanation",
+      "from": "wrap_setup",
+      "headline": "세 칸을 따라가기",
+      "body": "0번 → 1번 → 2번",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "wrap_step_zero",
+      "type": "cards",
+      "from": "wrap_zero",
+      "headline": "0번 다음은 1번",
+      "body": "한 칸 이동",
+      "cards": [
+        {
+          "id": "cell_0",
+          "label": "0번"
+        },
+        {
+          "id": "cell_1",
+          "label": "1번"
+        },
+        {
+          "id": "cell_2",
+          "label": "2번"
+        }
+      ],
+      "layout": "row",
+      "carry": [],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "cell_0",
+          "at": "wrap_zero"
+        }
+      ]
+    },
+    {
+      "id": "wrap_step_one",
+      "type": "cards",
+      "from": "wrap_one",
+      "headline": "1번 다음은 2번",
+      "body": "한 칸 더 이동",
+      "cards": [
+        {
+          "id": "cell_0",
+          "label": "0번"
+        },
+        {
+          "id": "cell_1",
+          "label": "1번"
+        },
+        {
+          "id": "cell_2",
+          "label": "2번"
+        }
+      ],
+      "layout": "row",
+      "carry": [
+        "cell_0",
+        "cell_1",
+        "cell_2"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "cell_1",
+          "at": "wrap_one"
+        }
+      ]
+    },
+    {
+      "id": "wrap_step_two",
+      "type": "cards",
+      "from": "wrap_two",
+      "headline": "끝에서 처음으로",
+      "body": "(2 + 1) 나머지 3 = 0",
+      "cards": [
+        {
+          "id": "cell_0",
+          "label": "0번"
+        },
+        {
+          "id": "cell_1",
+          "label": "1번"
+        },
+        {
+          "id": "cell_2",
+          "label": "2번"
+        }
+      ],
+      "layout": "row",
+      "carry": [
+        "cell_0",
+        "cell_1",
+        "cell_2"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "cell_2",
+          "at": "wrap_two"
+        },
+        {
+          "type": "highlight",
+          "target": "cell_0",
+          "at": "wrap_back"
+        }
+      ]
+    },
+    {
+      "id": "wrap_conclusion",
+      "type": "conclusion",
+      "from": "wrap_end",
+      "headline": "마지막 다음은 처음",
+      "body": "원형으로 이어진다",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    }
+  ]
+}

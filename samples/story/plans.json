@@ -1,0 +1,12 @@
+[
+  {
+    "id": "stack", "title": "스택은 왜 나중에 넣은 값이 먼저 나올까?",
+    "topicKey": "stack.lifo", "objective": "스택의 후입선출을 A와 B의 입력·출력 순서로 설명한다.",
+    "angle": "쌓인 두 카드를 꺼내는 순서로 보여준다.", "references": [], "input": "samples/story/stack.json"
+  },
+  {
+    "id": "queue", "title": "큐는 왜 먼저 들어온 값이 먼저 나올까?",
+    "topicKey": "queue.fifo", "objective": "큐의 선입선출을 A와 B의 입력·출력 순서로 설명한다.",
+    "angle": "줄 선 두 카드가 나오는 순서로 보여준다.", "references": [], "input": "samples/story/queue.json"
+  }
+]

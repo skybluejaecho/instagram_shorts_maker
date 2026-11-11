@@ -1,0 +1,17 @@
+{
+  "id": "cs-auto-live-01-b01-01",
+  "seriesId": "cs-auto-live",
+  "title": "가득 찬 deque에 값을 더 넣으면 무엇이 사라질까?",
+  "topicKey": "deque.maxlen-append-discards-opposite-end",
+  "objective": "Python의 maxlen deque가 가득 찬 상태에서 append하면 반대쪽 끝의 값이 밀려나고 길이는 유지됨을 이해한다.",
+  "angle": "최대 길이 2인 deque의 A, B에 C를 오른쪽으로 추가해 B, C가 되는 변화를 따라간다.",
+  "references": [
+    "https://docs.python.org/3/library/collections.html#collections.deque"
+  ],
+  "knowledge": {
+    "core": "Python의 maxlen deque가 가득 찬 상태에서 append로 오른쪽에 새 값을 추가하면 반대쪽인 왼쪽 끝의 값이 밀려나고 전체 길이는 유지된다.",
+    "example": "최대 길이 2인 deque [A, B]에 C를 오른쪽으로 append하여 A가 사라지고 [B, C]가 되는 예시."
+  },
+  "input": "planning/inputs/cs-auto-live-cs-auto-live-01-b01-01-5087abc2-61cd-4564-9bf5-4632033be7a0.json",
+  "scheduledFor": "2026-11-23T10:00:00.000Z"
+}

@@ -1,0 +1,154 @@
+{
+  "audience": "자료구조를 처음 배우는 사람",
+  "tone": "짧은 질문에서 시작해 A와 B의 순서로 설명한다.",
+  "version": 1,
+  "title": "push와 pop은 스택 크기를 어떻게 바꿀까?",
+  "durationSeconds": 30,
+  "profile": {
+    "brand": "CS 한 장",
+    "fontFamily": "Malgun Gothic",
+    "colors": {
+      "background": "#102b36",
+      "text": "#f5f4ee",
+      "accent": "#a8edc7",
+      "muted": "#a5b8bd"
+    },
+    "transitionSeconds": 0.55,
+    "speech": {
+      "voice": "Microsoft Heami Desktop",
+      "rate": 2
+    }
+  },
+  "narration": [
+    {
+      "id": "size_q",
+      "text": "스택에 값을 넣고 꺼내면 크기는 어떻게 달라질까요?"
+    },
+    {
+      "id": "size_rule",
+      "text": "크기는 들어 있는 값의 개수입니다. 빈 스택의 크기는 0입니다."
+    },
+    {
+      "id": "size_push_a",
+      "text": "에이를 push하면 크기는 0에서 1이 됩니다."
+    },
+    {
+      "id": "size_a_state",
+      "text": "에이가 든 상태에서 현재 크기는 1입니다."
+    },
+    {
+      "id": "size_push_b",
+      "text": "비를 push하면 크기는 1에서 2가 됩니다."
+    },
+    {
+      "id": "size_pop_b",
+      "text": "비를 pop하면 크기는 2에서 1로 줄어듭니다."
+    },
+    {
+      "id": "size_end",
+      "text": "정리하면 push는 1을 더하고, 값이 있을 때 pop은 1을 뺍니다."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "size_scene_q",
+      "type": "question",
+      "from": "size_q",
+      "headline": "크기는 어떻게\n달라질까?",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "size_scene_rule",
+      "type": "explanation",
+      "from": "size_rule",
+      "headline": "크기 = 값의 개수",
+      "body": "빈 스택의 크기는 0",
+      "cards": [],
+      "layout": "stack",
+      "carry": [],
+      "actions": []
+    },
+    {
+      "id": "size_scene_a",
+      "type": "cards",
+      "from": "size_push_a",
+      "headline": "A를 push",
+      "body": "크기 0 → 1",
+      "cards": [
+        {
+          "id": "card_a",
+          "label": "A"
+        }
+      ],
+      "layout": "stack",
+      "carry": [],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "card_a",
+          "at": "size_push_a"
+        }
+      ]
+    },
+    {
+      "id": "size_scene_b",
+      "type": "cards",
+      "from": "size_a_state",
+      "headline": "B도 push",
+      "body": "크기 1 → 2",
+      "cards": [
+        {
+          "id": "card_a",
+          "label": "A"
+        },
+        {
+          "id": "card_b",
+          "label": "B"
+        }
+      ],
+      "layout": "stack",
+      "carry": [
+        "card_a"
+      ],
+      "actions": [
+        {
+          "type": "highlight",
+          "target": "card_b",
+          "at": "size_push_b"
+        }
+      ]
+    },
+    {
+      "id": "size_scene_pop",
+      "type": "cards",
+      "from": "size_pop_b",
+      "headline": "B를 pop",
+      "body": "크기 2 → 1",
+      "cards": [
+        {
+          "id": "card_a",
+          "label": "A"
+        }
+      ],
+      "layout": "stack",
+      "carry": [
+        "card_a"
+      ],
+      "actions": []
+    },
+    {
+      "id": "size_scene_end",
+      "type": "conclusion",
+      "from": "size_end",
+      "headline": "push는 +1\npop은 -1",
+      "body": "단, pop할 값이 있을 때",
+      "cards": [],
+      "layout": "row",
+      "carry": [],
+      "actions": []
+    }
+  ]
+}
